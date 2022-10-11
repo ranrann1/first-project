@@ -1,0 +1,91 @@
+package ez_phone.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import ez_phone.dto.NoticeDTO;
+
+public class NoticeDAO extends JdbcDAO {
+	private static NoticeDAO _dao;
+	
+	private NoticeDAO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	static {
+		_dao=new NoticeDAO();
+	}
+	
+	public static NoticeDAO getDAO() {
+		return _dao;
+	}
+	
+	//NOTICE 테이블에 삽입하고 삽입행 갯수 반환
+	public int insertNotice(NoticeDTO notice) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int rows=0;
+		try {
+			con=getConnection();
+			
+			String sql="insert into notice values(?,?,sysdate,?,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, notice.getNcode());
+			pstmt.setString(2, notice.getNtitle());
+			pstmt.setString(3, notice.getNcontent());
+			
+			rows=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("[에러]insertNotice 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt);
+		}
+		return rows;
+	}
+	
+	//NOTICE 테이블에 저장된 게시글 조회수 변경
+	
+	public int updateReadcount(int ncode) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int rows=0;
+		try {
+			con=getConnection();
+			
+			String sql="update notice set readcount=readcount+1 where ncode=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, ncode);
+			
+			rows=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("[에러]updateReadcount 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt);
+		}
+		return rows;
+	}
+	
+	//저장된 게시글 변경하고 변경행의 갯수를 반환
+	public int updateNotice(NoticeDTO notice) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int rows=0;
+		try {
+			con=getConnection();
+			
+			String sql="update notcie set ntitle=?,ncontent=? where ncode=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, notice.getNtitle());
+			pstmt.setString(2, notice.getNcontent());
+			pstmt.setInt(3, notice.getNcode());
+			
+			rows=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("[에러]updateNotice 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt);
+		}
+		return rows;
+	}
+}

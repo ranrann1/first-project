@@ -1,0 +1,55 @@
+<%@page import="java.util.List"%>
+<%@page import="ez_phone.dao.*" %>
+<%@page import="ez_phone.dto.*" %>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	List<ProductDTO> productList= ProductDAO.getDAO().selectIphoneList();
+%>  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+ul {
+list-style-type:none;\
+margin-left:20px;
+}
+ul li{
+
+outline : 1px solid black;
+float:left;
+}
+ul li p{
+font-size:15px;
+}
+</style>
+</head>
+
+<img src="<%=request.getContextPath() %>/images/apple.png" width="1230" height="100">
+		<% if(productList.isEmpty()) { %>
+				<p>등록된 핸드폰이 없습니다.</p>			
+		<%}else { %>
+			<% for(ProductDTO product:productList) { %>
+			<ul>
+				<li>
+				<a href="index.jsp?workgroup=order&process=order-area">
+					<img src="<%=request.getContextPath() %>/images/iphone/<%=product.getPimage() %>" width="180" height="300">
+					</a>
+					<p>기종 : 
+					<%=product.getPname()%>
+					</p>
+					<p>
+					가격 : <%=product.getPprice() %> 원
+					</p>
+
+				</li>
+					
+			</ul>
+		
+			<%} %>
+		<%} %>
+</body>
+</html>

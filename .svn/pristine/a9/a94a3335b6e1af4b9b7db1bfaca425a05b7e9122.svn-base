@@ -1,0 +1,409 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<style type="text/css">
+	
+a{
+	text-decoration-line: none;
+	color: black;
+}	
+
+
+div {
+	display: block;
+}
+
+
+
+#sub_div>.inner {
+	padding: 65px 0 85px;
+}
+
+.inner {
+	width: 1200px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.sub_tit_h3 {
+	text-align: center;
+	font-size: 30px;
+	line-height: 1.1;
+	font-family: "BR";
+}
+
+
+
+html, h1, h2, h3, h4, h5, h6, form, fieldset, img {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+h3 {
+	display: block;
+	font-size: 1.17em;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	font-weight: bold;
+}
+
+.sub_cate {
+	text-align: center;
+	margin: 65px auto 50px;
+	overflow: hidden;
+	display: table;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul {
+	display: block;
+	list-style-type: disc;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	padding-inline-start: 40px;
+}
+
+.sub_cate li {
+	display: inline-block;
+	vertical-align: middle;
+	width: 280px;
+}
+
+li {
+	list-style: none;
+}
+
+ol, li, dl, dt, dd {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	display: list-item;
+	text-align: -webkit-match-parent;
+}
+
+.sub_cate {
+	text-align: center;
+	margin: 65px auto 50px;
+	overflow: hidden;
+	display: table;
+}
+
+/* .sub_cate li.active a {
+	font-weight: 600;
+	color: #e80000;
+} */
+
+.sub_cate li a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	font-size: 18px;
+	line-height: 1.2;
+	font-weight: 400;
+	color: #000;
+	border-bottom: 4px solid #efefef;
+	padding-bottom: 20px;
+	position: relative;
+	transition: all 0.2s;
+}
+
+.notice {
+	margin-top: 60px;
+}
+
+
+
+p {
+	margin: 0;
+	padding: 0;
+	word-break: break-all;
+}
+
+p {
+	display: block;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+}
+
+.notice {
+	margin-top: 60px;
+}
+
+.n_title {
+	font-size: 24px;
+	margin-bottom: 15px;
+}
+
+.n_table table {
+	width: 100%;
+	border-spacing: 0;
+	border-bottom: 1px solid #949494;
+}
+
+.n_table table th {
+	height: 70px;
+	text-align: center;
+	font-size: 17px;
+	border-top: 2px solid #1a1a1a;
+	border-bottom: 1px solid #949494;
+}
+
+.n_table table td {
+	height: 148px;
+	font-size: 17px;
+	border-bottom: 1px solid #dcdcdc;
+}
+
+.n_table table tr:last-child td {
+	border-bottom: 0;
+}
+
+.n_table table td.td_num {
+	width: 80px;
+	text-align: center;
+}
+
+.n_table table td.td_thumb {
+	width: 145px;
+	padding: 13px 0;
+	text-align: center;
+}
+
+.n_table table td.td_thumb img {
+	width: 100%
+}
+
+.n_table table td.td_prod {
+	width: 355px;
+	text-align: left;
+	padding-left: 30px;
+}
+
+.n_table table td.td_official {
+	width: 240px;
+	text-align: center;
+}
+
+.n_table table td.td_progress {
+	width: 240px;
+	text-align: center;
+}
+
+.n_table table td.td_pay {
+	width: 140px;
+	text-align: center;
+}
+
+.n_table table td .selected_color {
+	display: inline-block;
+	vertical-align: middle;
+	width: 17px;
+	height: 17px;
+	border-radius: 100%;
+	margin-left: 8px;
+	border: 1px solid #dfdfdf;
+}
+
+.n_table table td.td_official a {
+	display: inline-block;
+	width: 155px;
+	height: 36px;
+	line-height: 34px;
+	border: 1px solid #000;
+	border-radius: 5px;
+}
+
+.n_table table td.td_official a.active {
+	color: #E80000;
+	border-color: #E80000;
+}
+
+.n_table table td.td_official a.deactive {
+	color: #666;
+	border-color: #666;
+	pointer-events: none;
+}
+
+.n_table table td.td_progress span {
+	display: inline-block;
+	width: 90px;
+	height: 36px;
+	line-height: 36px;
+	color: #fff;
+	background: #000;
+	border-radius: 5px;
+}
+
+.n_table table td.td_progress span.preparing {
+	background: #999;
+}
+
+.n_table table td.td_progress span.complete {
+	background: #33b06d;
+}
+
+.n_table table td.td_progress span.review_write {
+	background: #E80000;
+	cursor: pointer;
+}
+#bo_cate {margin:35px 0}
+#bo_cate h2 {position:absolute;font-size:0;line-height:0;overflow:hidden}
+#bo_cate ul {;zoom:1}
+#bo_cate ul:after {display:block;visibility:hidden;clear:both;content:""}
+#bo_cate li {display:inline-block;position:relative;}
+#bo_cate li::after{content:'';display:block;width:1px;height:13px;background:#dcdcdc;position:absolute;top:50%;right:0;transform:translateY(-50%);}
+#bo_cate li:last-child::after{display:none;}
+#bo_cate a {display:block;padding:0 20px;font-size:18px;color:#666;}
+#bo_cate a:focus, #bo_cate a:hover, #bo_cate a:active {text-decoration:none;background:#f3f3f3}
+#bo_cate #bo_cate_on {z-index:2;color:#e80000;}
+
+#faq_wrap {margin:10px 0 30px}
+#faq_wrap h2 {position:absolute;font-size:0;line-height:0;overflow:hidden}
+.faq_admin {text-align:right}
+#faq_wrap ol {margin:0;padding:0;list-style:none}
+#faq_wrap li{border:1px solid #d4d4d4;border-top:none;background:#fff;}
+#faq_wrap li:first-child{border-top:1px solid #d4d4d4;}
+#faq_wrap li h3{font-size:17px;line-height:1.8;font-weight:600;position:relative;}
+#faq_wrap li h3 .arr{position:absolute;top:50%;right:24px;margin-top:-8px;transition:0.5s;}
+#faq_wrap li h3 .arr.on{transform:rotate(180deg);}
+#faq_wrap li h3 .tit_bg{display:inline-block;position:absolute;top:25px;left:28px;text-align:center;font-size:28px;line-height:1.1;font-weight:700;color:#000;}
+#faq_wrap li h3 a {display:block;padding:25px;padding-left:94px;}
+#faq_con .con_inner{display:none;border-top:1px solid #d4d4d4;padding:25px;padding-left:94px;font-size:15px;line-height:30px;position:relative;background: #f0f0f0;}
+#faq_con .con_inner .tit_bg{display:inline-block;position:absolute;top:28px;left:28px;text-align:center;font-size:28px;line-height:1.1;font-weight:700;color:#e80000;}
+#faq_con .con_inner .closer_btn{height:25px;font-size:13px;display:inline-block;padding:0 5px;border-radius:5px;background:#fff;cursor:pointer;}
+#faq_con .con_closer{text-align:right;}
+
+#faq_sch {text-align:center;border:1px solid #ccc;background:#fff;;padding:30px;margin:10px 0}
+#faq_sch form{display:inline-block;position:relative}
+#faq_sch .sch_tit{font-size:20px;font-weight:bold;display:inline-block;margin-right:10px;vertical-align:middle}
+#faq_sch .frm_input{border-color:#646982;border-radius:0;width:300px}
+#faq_sch .btn_submit{padding:0 10px;height:40px;color:#000;font-size:1.083em;font-weight:bold;color:#fff;background:#253dbe;}
+
+</style>
+<div id="sub_div">
+
+	
+	
+	<div class="inner ">
+		<div class="sub_top_wrap ">
+			<h3 class="sub_tit_h3">FAQ</h3>			<p class="sub_desc_p ">			
+				<ul class="sub_cate">
+					<li class="active"><a href="index.jsp?workgroup=notice&process=notice_list">공지사항</a></li>
+					<li class="active"><a href="index.jsp?workgroup=board&process=board_list">1:1문의</a></li>
+					<li class="active"><a href="index.jsp?workgroup=board&process=board_question_list">자주묻는질문</a></li>
+
+				</ul>
+
+		</div>
+
+<!-- FAQ 시작 { -->
+<div id="faq_hhtml"></div>
+<fieldset id="faq_sch" style="display:none">
+    <legend>FAQ 검색</legend>
+
+    <form name="faq_search_form" method="get">
+    <span class="sch_tit">FAQ 검색</span>
+    <input type="hidden" name="fm_id" value="2">
+    <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
+    <input type="text" name="stx" value="" required id="stx" class="frm_input " size="15" maxlength="15">
+    <button type="submit" value="검색" class="btn_submit"><i class="fa fa-search" aria-hidden="true"></i> 검색</button>
+    </form>
+</fieldset>
+
+
+<nav id="bo_cate">
+    <h2>자주하시는질문 분류</h2>
+    <ul id="bo_cate_ul">
+                <li><a href="index.jsp?workgroup=board&process=board_question_list"  >신청·개통문의</a></li>
+                <li><a href="index.jsp?workgroup=board&process=board_faq2"   id="bo_cate_on" ><span class="sound_only"></span>배송문의</a></li>
+                <li><a href="index.jsp?workgroup=board&process=board_faq3"  >취소·교환·반품문의</a></li>
+            </ul>
+</nav>
+
+<div id="faq_wrap" class="faq_2">
+        <section id="faq_con">
+        <h2>배송문의 목록</h2>
+        <ol>
+                        <li>
+                <h3><span class="tit_bg font_mt">Q</span><a href="#none" onclick="return faq_open(this);"><p style="margin-left:0px;">배송 기간이 궁금합니다.</p></a></h3>
+                <div class="con_inner">
+                    <span class="tit_bg font_mt">A</span>
+                    <p>정상적으로 해피콜 및 정보조회가 완료 된 시점 기준으로</p><p><span style="color:rgb(255,0,0);">평균 배송은 1일</span> 가량이 소요 됩니다.<br /><br /><span style="color:rgb(255,0,0);">배송 사(우체국,cj대한통운,로젠택배) 사정</span>으로 인하여</p><p>늦어 질 수 있습니다.</p><p><br /></p><p><span style="color:rgb(255,0,0);">단말기 재고 현황</span>이 여의치 않으면 배송기간은<br />3일 가량 늘어날 수 있습니다.</p><p><br />배송이 진행되면 <span style="color:rgb(255,0,0);">카카오 알림톡으로 배송진행 상황이 전송</span>되오니,</p><p>알림톡을 차단해놓으시면 배송 및 진행상황 등을 전달 받을 수 없습니다.</p>                    
+                </div>
+            </li>
+                        <li>
+                <h3><span class="tit_bg font_mt">Q</span><a href="#none" onclick="return faq_open(this);"><p>신청하면 바로 배송 되나요?</p></a></h3>
+                <div class="con_inner">
+                    <span class="tit_bg font_mt">A</span>
+                    <p>신청 후 <span style="color:rgb(255,0,0);">해피콜 및 정보조회 공식신청서 작성이 완료</span> 되시면,</p><p><span style="color:rgb(255,0,0);">배송이 시작 됩니다.</span></p><p><br /></p><p>신청 후 <span style="color:rgb(255,0,0);">해피콜을 정상적으로 받아 주셔야 배송이 가능</span>하오니,</p><p>해피콜을 잘 받아주시면 됩니다.</p>                    
+                </div>
+            </li>
+                        <li>
+                <h3><span class="tit_bg font_mt">Q</span><a href="#none" onclick="return faq_open(this);"><p>신청 후 배송지 변경이 가능한가요?</p></a></h3>
+                <div class="con_inner">
+                    <span class="tit_bg font_mt">A</span>
+                    <p>네, <span style="color:rgb(255,0,0);">배송 출발 전까지</span>는 언제든 카카오채널 및 대표전화로<br />변경 주소지를 말씀해주시면 <span style="color:rgb(255,0,0);">배송주소 변경이 가능</span>합니다.</p>                    
+                </div>
+            </li>
+                        <li>
+                <h3><span class="tit_bg font_mt">Q</span><a href="#none" onclick="return faq_open(this);"><p>배송비는 무료인가요?</p></a></h3>
+                <div class="con_inner">
+                    <span class="tit_bg font_mt">A</span>
+                    <p>네, <span style="color:rgb(255,0,0);">모든 상품은 배송비가 무료</span>입니다.</p><p><br /></p><p>다만 휴대폰 특성상 고가의 전자제품이면서 작은사이즈여서</p><p><span style="color:rgb(255,0,0);">배송기사 분들께서 던지거나 아무곳에나 놓고 가는 경향이 있어</span></p><p><span style="color:rgb(255,0,0);">파손 및 분실 사건</span>이 종종 일어나게 됩니다.</p><p><br /></p><p>이에 당근폰은 고객께 착불로 먼저 보내어</p><p><span style="color:rgb(255,0,0);">고객 가족 또는 고객본인께서 직접수령</span>을 하도록</p><p>하고 있습니다.</p><p><br /></p><p>지불하신 배송비는 개통 시 <br />당근폰에 말씀해주신 계좌로<span style="color:rgb(255,0,0);"> 현금 환급</span>됩니다.</p>                    
+                </div>
+            </li>
+                    </ol>
+    </section>
+    </div>
+
+
+<div id="faq_thtml"></div>
+
+<!-- } FAQ 끝 -->
+
+
+<script src="text/javascript"></script>
+<script>
+$(function() {
+    $(".closer_btn").on("click", function() {
+        $(this).closest(".con_inner").slideToggle();
+    });
+});
+
+function faq_open(el)
+{
+    var $con = $(el).closest("li").find(".con_inner");
+
+    if($con.is(":visible")) {
+        $con.slideUp();
+		$(el).siblings(".arr").removeClass("on");
+    } else {
+        $("#faq_con .con_inner:visible").css("display", "none");
+		$(".arr").removeClass("on");
+
+        $con.slideDown(
+            function() {
+                // 이미지 리사이즈
+                $con.viewimageresize2();
+            }
+        );
+				$(el).siblings(".arr").addClass("on");
+    }
+
+    return false;
+}
+</script>	</div>
+</div>

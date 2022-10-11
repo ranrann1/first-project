@@ -1,0 +1,30 @@
+package ez_phone.dto;
+
+public class CartDTO {
+	private String c_code;
+	private String ID;
+	private String p_code;
+	public CartDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	public String getC_code() {
+		return c_code;
+	}
+	public void setC_code(String c_code) {
+		this.c_code = c_code;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
+	}
+	public String getP_code() {
+		return p_code;
+	}
+	public void setP_code(String p_code) {
+		this.p_code = p_code;
+	}
+	
+}
+

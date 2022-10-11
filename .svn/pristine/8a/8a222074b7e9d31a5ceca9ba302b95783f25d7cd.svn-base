@@ -1,0 +1,63 @@
+package ez_phone.dto;
+
+/*
+이름          널?       유형             
+----------- -------- -------------- 
+N_CODE      NOT NULL NUMBER(4)    	- 글번호  
+N_TITLE     NOT NULL VARCHAR2(500)  - 제목
+N_DATE      NOT NULL DATE           - 작성일자
+N_READCOUNT          NUMBER(4)      - 조회수
+N_CONTENT   NOT NULL VARCHAR2(4000) - 내용
+ */
+
+public class NoticeDTO {
+	private int ncode;
+	private String ntitle;
+	private String ndate;
+	private int nreadcount;
+	private String ncontent;
+	
+	public NoticeDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getNcode() {
+		return ncode;
+	}
+
+	public void setNcode(int ncode) {
+		this.ncode = ncode;
+	}
+
+	public String getNtitle() {
+		return ntitle;
+	}
+
+	public void setNtitle(String ntitle) {
+		this.ntitle = ntitle;
+	}
+
+	public String getNdate() {
+		return ndate;
+	}
+
+	public void setNdate(String ndate) {
+		this.ndate = ndate;
+	}
+
+	public int getNreadcount() {
+		return nreadcount;
+	}
+
+	public void setNreadcount(int nreadcount) {
+		this.nreadcount = nreadcount;
+	}
+
+	public String getNcontent() {
+		return ncontent;
+	}
+
+	public void setNcontent(String ncontent) {
+		this.ncontent = ncontent;
+	}
+}

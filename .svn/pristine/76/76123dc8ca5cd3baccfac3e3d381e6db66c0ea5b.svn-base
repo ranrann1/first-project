@@ -1,0 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>제품 상세 페이지</h2>
+	<a href="index.jsp?workgroup=cart_menu&process=cart"><button>장바구니</button></a>
+	<a href="index.jsp?workgroup=order&process=order-area"><button>결제 하기</button></a>
+	
+</body>
+</html>

@@ -1,0 +1,192 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="ez_phone.dao.ProductDAO"%>
+<%@page import="ez_phone.dto.ProductDTO"%>
+<%@page import="ez_phone.dao.MemberDAO"%>
+<%@page import="ez_phone.dto.MemberDTO"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	//비정상적인 요청에 대한 응답 처리
+	if(request.getParameter("p_code")==null) {
+		out.println("<script type='text/javascript'>");
+		out.println("location.href='index.jsp?workgroup=error&process=error_400';");
+		out.println("</script>");
+		return;			
+	}
+
+	//전달값을 반환받아 저장
+	String p_code=request.getParameter("p_code");
+	
+	//제품번호를 전달받아 PRODUCT 테이블에 저장된 제품정보를 검색하여 반환하는 DAO 클래스의 메소드 호출
+	ProductDTO product=ProductDAO.getDAO().selectProduct(p_code);
+	
+	//검색된 제품정보가 없는 경우 에러페이지로 이동 - 비정상적인 요청
+	if(product==null) {
+		out.println("<script type='text/javascript'>");
+		out.println("location.href='index.jsp?workgroup=error&process=error_500';");
+		out.println("</script>");
+		return;			
+	}
+%>
+
+
+	
+<style type="text/css">
+h2{
+text-align: left;
+}
+table {
+	margin: 0 auto; 
+	border-collapse: collapse;
+}
+
+td {
+	border: 1px solid black;
+}
+
+.title {
+	background-color: black;
+	color: white;
+	text-align: center;
+	width: 100px;
+}
+
+.value {
+	padding: 5px;
+	text-align: left;
+	width: 500px;
+}
+.itm-information {
+    width: 80%;
+    max-width: 22.9091vw;
+    min-height: 31.8182vw;
+    padding: 2.5455vw 2.1818vw 2.1818vw;
+    border-radius: 2.0909vw;
+    position: relative;
+    float: right;
+	background-color: #f7f7f7;
+    box-sizing: border-box;
+    font-size: 1.5vw;
+    margin-right: 10vw;
+}
+ul{
+    display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+li{
+	padding: 10px;
+}
+.btn-d {
+    min-width: 96px;
+    height: 40px;
+    line-height: 38px;
+    font-size: 14px;
+    border-radius: 20px;
+}
+	
+.btn-type1 {
+    color: #212425;
+    background: #fff;
+    border: 1px solid #212425;
+}
+
+.item-title{
+	margin-top: 15vw;
+    background: #202425;
+}
+.item-title-p{
+	color : #fff;
+	font-size: 1.5vw;
+	text-align: center;
+}
+.buyBtn{
+margin: auto;
+}
+.o-title {
+	margin-bottom: 0vw;
+}
+
+.o-label {
+	margin-top: 0.4167vw;
+    font-size: 0.8333vw;
+}
+.itm-option-choice {
+    padding: 1.7273vw 1.1818vw;
+    margin-top: 1.8182vw;
+    border-radius: 0.9091vw;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+.itm-option-choice dt {
+    width: 3.2727vw;
+    font-size: 1.4545vw;
+    line-height: 2.1818vw;
+    color: #707070;
+    position: absolute;
+}
+.itm-option-choice dd {
+    margin-left: 9.0909vw;
+}
+</style>
+
+<h2>제품상세정보</h2>
+<div>
+	<img src="<%=request.getContextPath()%>/images_product_all/<%=product.getP_image() %>" width="450">
+	<div class="itm-information">
+		 
+		<strong><p class=o-title><%=product.getP_name() %></p></strong>
+		<p class=o-label><%=product.getP_code() %></p>
+		<div class="itm-option-choice droptoggle">
+			<dl>
+				<dt><span>색상</span></dt>
+				<dd><%=product.getP_color() %></dd>
+			</dl>
+			<dl>
+				<dt><span>용량</span></dt>
+				<dd><%=product.getP_size() %>GB</dd>
+			</dl>
+		</div>
+		<p>가격 : 
+			<%=DecimalFormat.getInstance().format(product.getP_price()) %>
+		</p>
+		
+		<div class="buyBtn">
+		<ul>
+			<li>
+			<form action="index.jsp?workgroup=cart_menu&process=cart_add" method="post" >
+				<input type="hidden" name="p_code" value="<%=product.getP_code() %>">
+				<button type="submit" class="btn btn-d btn-type1">장바구니</button>
+			</form>
+			</li>
+			<li>
+			<form action="index.jsp?workgroup=order&process=order_product" method="post" >
+				<input type="hidden" name="p_code" value="<%=product.getP_code() %>">
+				<button type="submit" class="btn btn-d btn-type1">결제 하기</button>
+			</form>
+			</li>
+		</ul>
+		</div>
+	</div>
+</div>
+<div class="item-title">
+	<ul>
+		<li>
+			<p class="item-title-p">스펙</p>
+		</li>
+		<li>
+			<p class="item-title-p">리뷰</p>
+		</li>
+	</ul>
+</div>
+
+<div>
+	<img src="<%=request.getContextPath()%>/images_product_all/<%=product.getP_image2() %>" width="80%">
+</div>
+
+<div>
+	
+</div>
+	

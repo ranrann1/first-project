@@ -1,0 +1,134 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+String workgroup = request.getParameter("workgroup");
+if (workgroup == null) {
+	workgroup = "main";
+}
+
+String process = request.getParameter("process");
+if (process == null) {
+	process = "main";
+}
+
+String contentFilePath = workgroup + "/" + process + ".jsp";
+System.out.println("contentFilePath = " + contentFilePath);
+%> 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EZPHONE</title>
+
+<link href="style.css" type="text/css" rel="stylesheet">
+<link href="style_cart.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+	<!-- Main content -->	
+	    <div id="container" class='' >
+	    
+	    <!-- s : pg-location -->
+	        <div class="pg-location"></div>
+	        <div id='latestItemLayer' class='layer-pop layer-normal floatingStyle'></div>
+		    <div class="pg-location">
+				<div class="pg-location-inner">
+					<a href="/sec/">HOME</a>
+					<a href="javascript:;">장바구니</a>
+				</div>
+			</div>
+		<!-- e : pg-location -->
+		
+			<div id="editor"></div>
+			<form name="cart_form" id="cart_form">
+				<div class="content cart-content">
+					<div class="tit-box cart-title">
+					    <h1 class="txt-s20">장바구니</h1>
+					</div>
+					<div class="cart-elec-area">
+					<!-- s : 전체선택 -->
+						<div class="opt-select main-cart">
+							<div class="chk-form">
+							    <input type="checkbox" id="cart_check_box_all" data-type="main" name="cart_check_box_all" value="N" required="" title="">
+							    <label for="cart_check_box_all">전체선택</label>
+								<div class="opt-select-right">
+									<button type="button" data-type="main" class="btn btn-s btn-type2-disable" onclick="cartHeaderBtn.delOpenLayer(this); return false;">선택 삭제</button>
+								</div>
+							</div>
+					<!-- e : 전체선택 -->
+					<!-- s : 주문상품 -->
+							<div class="cart-area main-cart">
+						   		<h2 class="blind">주문상품</h2>
+						   		<div class="empty-cart" style="display:block;">
+		        					<span class="empty-text">장바구니에 담겨있는 상품이 없습니다.</span>
+								</div>
+						       	<div class="cart-btn-box" style="display:block;">
+						        	<a href="/sec/" class="btn btn-d btn-type1">홈으로</a>
+						       	</div>
+						   	</div>
+					<!-- e : 주문상품 -->
+						</div>
+					</div>        
+		<!-- s : Sticky Sidebar -->                
+	        <div class="cart-payment-area empty">
+	        	<h2 class="blind delivery-title">배송지 추가/변경</h2>
+		    	<!-- s : 배송지 정보 -->
+		    	<div class="delivery-change" id="deliveryChange">
+		        	<div id="memberNoDeliveryAddress" style="display:none">
+		        		<p class="entry-add">배송지를 등록해 주세요.</p>
+		        		<button type="button" class="btn btn-d btn-type1" id="dlvrInsertBtn" name="dlvrInsertBtn" data-type="I" onclick="fnOnClickSaveBtn(this);">배송지 등록</button>
+		        	</div>
+		        	<div id="memberDefaultDeliveryAddress" style="">
+						<p class="delivery-tit"><span id="spanAdrsNm">기본 배송지 : 주소</span></p>
+						<p class="delivery-txt"><span id="spanRoadAddr">(12345) 도, 시, 구, 동, 길 주소 (동, 건물이름)</span></p>
+						<p class="delivery-txt"><span id="spanRoadDtlAddr">상세주소</span></p>
+						<button type="button" class="btn btn-d btn-type1" onclick="orderDlvra.openAddress(this);return false;">배송지 정보 추가/변경</button>
+					</div>
+		        	<div id="memberDeliveryAddress" style="display:none"></div>
+		        </div>
+		 		<!-- e : 배송지 정보 -->
+		 		<!-- s : 결제 정보 -->
+			 	<h2 class="blind">결제 정보</h2>
+					<ul class="payment-listup cart-bcart-top">
+						<li>
+					   	    <span class="head">전체 상품</span>
+					        <span class="text"><strong>0</strong> 개</span>
+					    </li>
+					    <li>
+					        <span class="head">주문 금액</span>
+					        <span class="text"><strong>0</strong> 원</span>
+					    </li>
+					    <li>
+					         <span class="head">할인 금액</span>
+					         <span class="text color-sb"><strong>0</strong> 원</span>
+					    </li>
+					</ul>
+				    <ul class="cost-listup">
+					    <li>
+					      	<span class="head"><strong>결제 예정 금액</strong></span>
+					        <span class="text"><strong>0</strong> 원</span>
+					   </li>
+				    </ul>
+				<!-- e : 결제 정보 -->
+	        </div>
+		<!-- e : Sticky Sidebar -->
+		<!-- s : cart-foot-->
+			    <div class="cart-foot">
+				    <div class="cart-foot-inner">
+				    	<div class="cart-foot-left">
+					        <p>고객센터<strong class="txt-small"> 1588-6084</strong>평일 09시 ~ 18시 / 토요일 09시 ~ 13시 (일요일, 공휴일은 운영하지 않습니다.)</p>
+					        <p>큐커 식품관 고객센터 <strong class="txt-small">1811-9228</strong> 평일 09시~ 18시(주말, 공휴일은 운영하지 않습니다.</p>
+					    </div>
+				    	<div class="cart-foot-right">
+				            <a href="javascript:void(0);" class="btn-underline" data-popup-target="popupOrderCancel" data-omni="order cancelation">주문취소 안내</a>
+				        </div>
+				    </div>
+				</div>
+		<!-- e : cart-foot-->
+		    </div>
+		</form>
+	   	</div>	   	
+	<!-- e : Main content -->
+		
+
+</body>
+</html>

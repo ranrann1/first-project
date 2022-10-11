@@ -1,0 +1,66 @@
+package ez_phone.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import ez_phone.dao.JdbcDAO;
+
+import ez_phone.dto.BoardDTO;
+import ez_phone.dto.MemberDTO;
+
+public class BoardDAO extends JdbcDAO{
+private static BoardDAO _dao;
+	
+	public BoardDAO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	static {
+		_dao=new BoardDAO();
+	}
+	
+	public static BoardDAO getDAO() {
+		return _dao;
+	}
+	//board 테이블에 저장된 개인 문의글을  날짜순으로 정렬되도록 검색하여 반환 하는 메소드 
+	
+	public List<BoardDTO> selectBoardList(String member_id){
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<BoardDTO> boardList=new ArrayList<BoardDTO>();
+		try {
+			con=getConnection();
+			
+			String sql="select b_code, b_title, b_date, b_status from board join member on board.id = member.id where ID='" + member_id + "' order by b_date";
+			pstmt=con.prepareStatement(sql);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardDTO board=new BoardDTO();
+				board.setB_code(rs.getInt("b_code"));
+				board.setB_title(rs.getString("b_title"));
+				board.setB_date(rs.getString("b_date"));
+				board.setB_status(rs.getInt("b_status"));
+				boardList.add(board);
+				
+			}
+		} catch (SQLException e) {
+				System.out.println("[에러]selectBoardList 메소드의 SQL 오류 = "+e.getMessage());
+			} finally {
+				close(con, pstmt, rs);
+			}
+			return boardList;
+		}
+	}
+
+
+
+
+

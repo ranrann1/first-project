@@ -1,0 +1,5 @@
+package ez_phone.dto;
+
+public class NoticeDTO {
+
+}

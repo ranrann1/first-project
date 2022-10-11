@@ -1,0 +1,62 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EZPHONE</title>
+
+
+<link href="style.css" type="text/css" rel="stylesheet">
+<link href="style_mypage.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+
+	<div id="sub_div">
+
+
+		<div class="inner ">
+			<div class="sub_top_wrap ">
+				<h3 class="sub_tit_h3">마이페이지</h3>
+
+
+
+
+				<ul class="sub_cate">
+					<li class="active"><a href="jumun.jsp">주문조회</a></li>
+					<li><a href="muneui.jsp">내 1:1문의내역</a></li>
+					<li><a href="sujung.jsp">정보수정</a></li>
+
+				</ul>
+			</div>
+
+
+			<div class="orderinquiry">
+				<p class="oi_title">1:1문의내역</p>
+				<div class="oi_table">
+					<table class="">
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th colspan="2">제목</th>
+								<th>작성일</th>
+								<th>답변상태</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="6" style="text-align: center;">게시물이 없습니다</td>
+							</tr>
+						</tbody>
+					</table>
+
+
+				</div>
+
+
+
+			</div>
+</body>
+</html>

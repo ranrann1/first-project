@@ -1,0 +1,203 @@
+<%@page import="ez_phone.dto.MemberDTO"%>
+<%@page import="ez_phone.dao.BoardDAO"%>
+<%@page import="ez_phone.dto.BoardDTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	//비정상적인 요청에 대한 응답 처리
+	if(request.getParameter("b_code")==null) {
+		out.println("<script type='text/javascript'>");
+		out.println("location.href='index.jsp?workgroup=error&process=error_400';");
+		out.println("</script>");
+		return;			
+	}
+	
+	//전달값을 반환받아 저장
+	int b_code=Integer.parseInt(request.getParameter("b_code"));
+	String pageNum=request.getParameter("pageNum");
+	String search=request.getParameter("search");
+	String keyword=request.getParameter("keyword");
+	
+	//글번호를 전달받아 BOARD 테이블에 저장된 게시글을 검색하여 반환하는 DAO 클래스의 메소드 호출
+	BoardDTO board=BoardDAO.getDAO().selectBoard(b_code);
+	
+	//검색된 게시글이 없거나 삭제된 게시글인 경우 에러 페이지로 이동 - 비정상적 요청
+	if(board==null || board.getB_status()==0) {
+		out.println("<script type='text/javascript'>");
+		out.println("location.href='index.jsp?workgroup=error&process=error_400';");
+		out.println("</script>");
+		return;		
+	}	
+	
+	//세션에 저장된 권한 관련 정보를 반환받아 저장
+	MemberDTO loginMember=(MemberDTO)session.getAttribute("loginMember");
+	
+	/*
+	if(board.getB_status()==1) { //비밀 게시글인 경우
+		//비로그인 사용자이거나 로그인 사용자가 게시글 작성자 또는 관리자가 아닌 경우 에러 페이지 이동
+		// => 권한이 없는 사용자가 JSP 문서를 요청한 경우 - 비정상적인 요청
+		if(loginMember==null || !loginMember.getId().equals(board.getId()) && loginMember.getStatus()!=9) {
+			out.println("<script type='text/javascript'>");
+			out.println("location.href='index.jsp?workgroup=board&process=board_list&pageNum="+pageNum+"';");
+			out.println("</script>");
+			return;	
+		}
+	}
+	*/
+%>
+<style type="text/css">
+#board_detail {
+	width: 500px;
+	margin: 0 auto;
+}
+
+table {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+th {
+	width: 300px;
+	background-color: white;
+	color: black; 
+}
+
+td {
+	width: 1000px;
+}
+
+tr {
+	text-align: left;
+	height: 100px;
+	vertical-align: middle;
+}
+
+.b_title, .b_content {
+	text-align: left;
+}
+
+.b_content {
+	height: 100px;
+	vertical-align: middle;
+}
+
+.b_reply {
+	text-align: left;
+	height: 100px;
+	vertical-align: middle;
+}
+
+#board_menu {
+	text-align: right;
+	margin: 5px;
+}
+</style>
+<div id="board_detail">
+	<h2>1:1문의글</h2>
+	<table>
+		<tr>	
+			<th>작성일</th>
+			<td>
+				<%=board.getB_date() %>
+			</td>
+		</tr>
+		<tr>	
+			<th>제목</th>
+			<td class="b_title">
+				<%=board.getB_title() %>
+			</td>
+		</tr>
+		<tr>	
+			<th>내용</th>
+			<td class="b_content">
+				<%=board.getB_content().replace("\n", "<br>") %>
+			</td>
+		</tr>
+	</table>
+	  <form action="index.jsp?workgroup=admin&process=board_reply_action" method="post" id="boardForm">
+      <input type="hidden" name="b_code" value="<%=b_code%>">
+      <input type="hidden" name="pageNum" value="<%=pageNum%>">
+		<input type="hidden" name="search" value="<%=search%>">
+		<input type="hidden" name="keyword" value="<%=keyword%>">
+	<table>
+	<% if(board.getB_reply() != null) { %>
+      <tr>
+         <td>관리자 : <%=board.getB_reply() %></td>
+      </tr>
+      <% } %>
+      <% if(loginMember!=null && loginMember.getStatus()==9) { %>
+      <tr>
+         <td style="padding-top: 50px;">
+      	
+            <div id="b_reply">
+                  <textarea style=""rows="4" cols="68" class="b_replyWrite"
+                   placeholder="댓글을 작성하세요" name="b_reply"></textarea>
+                   <%if(board.getB_reply() == null) { %>
+               <input type="submit" value="답글쓰기" id="replyBtn" class="b_replyWrite">
+                  <% } else { %>
+                  <input type="submit" value="답글변경" id="modifyBtn" class="b_replyWrite">
+                  <% } %>
+               </div>
+         </td>
+      </tr>
+      <% } %>
+	</table>
+      </form>
+		<% if(loginMember!=null && (loginMember.getId().equals(board.getId()))) {//로그인 사용자 중 게시글 작성자인 경우 %>	
+		<div id="board_menu">
+			<button type="button" id="modifyBtn">글변경</button>	
+			<button type="button" id="removeBtn">글삭제</button>
+		</div>
+		<% } else if(loginMember!=null && (loginMember.getId().equals(board.getId()) 
+			|| loginMember.getStatus()==9)) {//로그인 사용자 중 게시글 작성자이거나 관리자인 경우 %>	
+		<div id="board_menu">
+				
+			<button type="button" id="removeBtn">글삭제</button>
+		</div>
+		<% } %>	
+		<div id="board_menu">
+		<button type="button" id="listBtn">글목록</button>	
+		</div>
+	
+	<%-- 요청 페이지로 값을 전달하기 위한 form 태그 --%>
+	<form method="post" id="menuForm">
+		<%-- [글변경] 및 [글삭제]를 클릭한 경우 전달되는 값 --%>
+		<input type="hidden" name="b_code" value="<%=board.getB_code()%>">
+		
+		<%-- [글변경] 및 [글목록]을 클릭한 경우 전달되는 값 --%>
+		<input type="hidden" name="pageNum" value="<%=pageNum%>">
+		<input type="hidden" name="search" value="<%=search%>">
+		<input type="hidden" name="keyword" value="<%=keyword%>">
+	</form>
+</div>
+
+<script type="text/javascript">
+$("#modifyBtn").click(function() {
+	$("#menuForm").attr("action","index.jsp?workgroup=admin&process=board_modify");
+	$("#menuForm").submit();
+});
+
+$("#removeBtn").click(function() {
+	if(confirm("게시글을 삭제 하시겠습니까?")) {	
+		$("#menuForm").attr("action","index.jsp?workgroup=admin&process=board_remove_action");
+		$("#menuForm").submit();
+	}
+});
+
+/*
+$("#replyBtn").click(function() {
+	$("#menuForm").attr("action","index.jsp?workgroup=board&process=board_reply_action");
+	$("#menuForm").submit();
+});
+*/
+
+$("#listBtn").click(function() {
+	$("#menuForm").attr("action","index.jsp?workgroup=admin&process=board_manager");
+	$("#menuForm").submit();
+});
+</script>

@@ -1,0 +1,200 @@
+package ez_phone.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import ez_phone.dto.NoticeDTO;
+
+public class NoticeDAO extends JdbcDAO {
+	private static NoticeDAO _dao;
+	
+	private NoticeDAO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	static {
+		_dao=new NoticeDAO();
+	}
+	
+	public static NoticeDAO getDAO() {
+		return _dao;
+	}
+	
+	//전체 게시글의 갯수를 검색하여 반환 - 검색 기능 미사용
+	public int selectNoticeCount() {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int count=0;
+		try {
+			con=getConnection();
+			
+			String sql="select count(*) from notice";
+			pstmt=con.prepareStatement(sql);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count=rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("[에러]selectNoticeCoount 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return count;
+	}
+	
+
+	
+	//NOTICE_SEQ 다음값 검색하여 반환
+	public int selectNextNum() {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int nextNum=0;
+		try {
+			con=getConnection();
+			
+			String sql="select notice_seq.nextval from dual";
+			pstmt=con.prepareStatement(sql);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				nextNum=rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("[에러]selectNextNum 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return nextNum;
+	}
+	
+	//NOTICE 테이블에 삽입하고 삽입행 갯수 반환
+	public int insertNotice(NoticeDTO notice) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int rows=0;
+		try {
+			con=getConnection();
+			
+			String sql="insert into notice values(?,?,sysdate,?,?,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, notice.getNum());
+			pstmt.setString(2, notice.getTitle());
+			pstmt.setString(3, notice.getContent());
+			pstmt.setInt(5, notice.getStatus());
+			
+			rows=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("[에러]insertNotice 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt);
+		}
+		return rows;
+	}
+	
+	//글번호 전달받아 게시글 반환
+	public NoticeDTO selectNotice(int num) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		NoticeDTO notice=null;
+		try {
+			con=getConnection();
+			
+			String sql="select * from notice where num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rs= pstmt.executeQuery();
+			
+			if(rs.next()) {
+				notice=new NoticeDTO();
+				notice.setNum(rs.getInt("num"));
+				notice.setTitle(rs.getString("title"));
+				notice.setRegDate(rs.getString("reg_date"));
+				notice.setContent(rs.getString("content"));				
+				notice.setStatus(rs.getInt("status"));
+			}
+		} catch (SQLException e) {
+			System.out.println("[에러]selectNotice 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return notice;
+	}
+	
+	//NOTICE 테이블에 저장된 게시글 조회수 변경
+	public int updateReadcount(int num) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int rows=0;
+		try {
+			con=getConnection();
+			
+			String sql="update notice set readcount=readcount+1 where num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rows=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("[에러]updateReadcount 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt);
+		}
+		return rows;
+	}
+	
+	//저장된 게시글 변경하고 변경행의 갯수를 반환
+	public int updateNotice(NoticeDTO notice) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int rows=0;
+		try {
+			con=getConnection();
+			
+			String sql="update notcie set title=?,content=?,status=? where num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, notice.getTitle());
+			pstmt.setString(2, notice.getContent());
+			pstmt.setInt(3, notice.getStatus());
+			pstmt.setInt(4, notice.getNum());
+			
+			rows=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("[에러]updateNotice 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt);
+		}
+		return rows;
+	}
+	
+	//게시글 상태 변경하고 변경행 갯수 반환
+	public int updateStatus(int num, int status) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int rows=0;
+		try {
+			con=getConnection();
+			
+			String sql="update notice set status=? where num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, status);
+			pstmt.setInt(2, num);
+			
+			rows=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("[에러]updateStatus 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt);
+		}
+		return rows;
+	}
+}

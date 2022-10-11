@@ -1,0 +1,83 @@
+package ez_phone.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import ez_phone.dto.ReviewDTO;
+
+public class ReviewDAO extends JdbcDAO {
+	private static ReviewDAO _dao;
+
+	public ReviewDAO() {
+	}
+
+	static {
+		_dao = new ReviewDAO();
+	}
+
+	public static ReviewDAO getDAO() {
+		return _dao;
+	}
+
+	public List<ReviewDTO> selectReviewList(String p_name) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<ReviewDTO> ReviewList = new ArrayList<ReviewDTO>();
+		try {
+			con = getConnection();
+
+			String sql = "select * from review where p_name = ?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, p_name);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				ReviewDTO Review = new ReviewDTO();
+				Review.setRcode(rs.getString("r_code"));
+				Review.setRcontent(rs.getString("r_content"));
+				Review.setRdate(rs.getString("r_date"));
+				Review.setRstarrating(rs.getString("r_star_rating"));
+				Review.setId(rs.getString("id"));
+				Review.setPname(rs.getString("p_name"));
+				ReviewList.add(Review);
+			}
+		} catch (SQLException e) {
+			System.out.println("[에러]selectReviewList 메소드의 SQL 오류 = " + e.getMessage());
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return ReviewList;
+	}
+	public int insertReview(ReviewDTO Review) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int rows=0;
+		try {
+			con=getConnection();
+			
+			String sql="insert into Review values(REVIEW_SEQ.nextval,?,SYSDATE,?,?,0,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, Review.getRcontent());
+			pstmt.setString(2, Review.getRstarrating());
+			pstmt.setString(3, Review.getId());
+			pstmt.setString(4	, Review.getPname());
+			
+			rows=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("[에러]insertReview 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt);
+		}
+		return rows;
+				
+	}
+
+}

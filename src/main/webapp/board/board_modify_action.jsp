@@ -1,0 +1,45 @@
+<%@page import="ez_phone.dao.BoardDAO"%>
+<%@page import="ez_phone.dto.BoardDTO"%>
+<%@page import="ez_phone.util.Utility"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%-- 게시글을 전달받아 BOARD 테이블에 저장된 게시글을 변경하고 게시글 출력페이지(board_detail.jsp)로
+이동하기 위한 정보를 전달하는 JSP 문서 - 글번호, 페이지 번호, 검색 관련 값 전달 --%>
+
+<%@include file="/security/login_check.jspf" %>
+
+<%
+	//비정상적인 요청에 대한 응답 처리
+	if(request.getMethod().equals("GET")) {
+		out.println("<script type='text/javascript'>");
+		out.println("location.href='index.jsp?workgroup=error&process=error_400';");
+		out.println("</script>");
+		return;		
+	}	
+
+	//전달값을 반환받아 저장
+	int b_code=Integer.parseInt(request.getParameter("b_code"));
+	String pageNum=request.getParameter("pageNum");
+	String search=request.getParameter("search");
+	String keyword=request.getParameter("keyword");
+	String b_title=Utility.escapeTag(request.getParameter("b_title"));
+	int b_status=1;
+	String b_content=Utility.escapeTag(request.getParameter("b_content"));
+	
+	//BoardDTO 객체를 생성하고 필드값 변경
+	BoardDTO board=new BoardDTO();
+	board.setB_code(b_code);
+	board.setB_title(b_title);
+	board.setB_content(b_content);
+	board.setB_status(b_status);
+	
+	//게시글을 전달받아 BOARD 테이블에 저장된 게시글을 변경하는 DAO 클래스의 메소드 호출
+	BoardDAO.getDAO().updateBoard(board);
+	
+	//페이지 이동
+	out.println("<script type='text/javascript'>");
+	out.println("location.href='index.jsp?workgroup=board&process=board_detail&b_code="+b_code
+		+"&pageNum="+pageNum+"&search="+search+"&keyword="+keyword+"';");
+	out.println("</script>");	
+%>

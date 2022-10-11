@@ -1,0 +1,514 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+<style type="text/css">
+@charset "UTF-8";
+
+
+#sub_div {
+    font-family: 'Noto Sans KR', 'NanumSquare', 'Nanum Barun Gothic', dotum, sans-serif;
+    color: #161616;
+}
+div {
+    display: block;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5em;
+    font-family: 'Noto Sans KR', 'NanumSquare', 'Nanum Barun Gothic', dotum, sans-serif;
+    letter-spacing: -1px;
+}
+#sub_div > .inner {
+    padding: 65px 0 85px;
+}
+
+.inner {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.sub_tit_h3 {
+    text-align: center;
+    font-size: 30px;
+    line-height: 1.1;
+    font-family: "BR";
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 1em;
+}
+
+html, h1, h2, h3, h4, h5, h6, form, fieldset, img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.sub_cate {
+    text-align: center;
+    margin: 65px auto 50px;
+    overflow: hidden;
+    display: table;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.sub_cate li {
+    display: inline-block;
+    vertical-align: middle;
+    width: 280px;
+}
+
+li {
+    list-style: none;
+}
+
+ol, li, dl, dt, dd {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.sub_cate {
+    text-align: center;
+    margin: 65px auto 50px;
+    overflow: hidden;
+    display: table;
+}
+
+.sub_cate li.active a {
+    font-weight: 600;
+    color: #e80000;
+}
+
+.sub_cate li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #000;
+    border-bottom: 4px solid #efefef;
+    padding-bottom: 20px;
+    position: relative;
+    transition: all 0.2s;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.sub_cate li.active a::after {
+    opacity: 1;
+}
+.sub_cate li a::after {
+    content: '';
+    width: 100%;
+    height: 4px;
+    background: black;
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    border-radius: 3px;
+    opacity: 0;
+    transition: all 0.2s;
+}
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.sub_cate li.active a {
+    font-weight: 600;
+    color: #e80000;
+}
+.sub_cate li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #000;
+    border-bottom: 4px solid #efefef;
+    padding-bottom: 20px;
+    position: relative;
+    transition: all 0.2s;
+}
+.sub_cate li {
+    display: inline-block;
+    vertical-align: middle;
+    width: 280px;
+}
+.orderinquiry {
+    margin-top: 60px;
+}
+.oi_title {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+p {
+    margin: 0;
+    padding: 0;
+    word-break: break-all;
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.orderinquiry{margin-top:60px;}
+.oi_title{font-size:24px;margin-bottom:15px;}
+
+.oi_table table{width:100%;border-spacing:0;border-bottom:1px solid #949494;}
+.oi_table table th{height:70px;text-align:center;font-size:17px;border-top:2px solid #1a1a1a;border-bottom:1px solid #949494;}
+.oi_table table td{height:148px;font-size:17px;border-bottom:1px solid #dcdcdc;}
+.oi_table table tr:last-child td{border-bottom:0;}
+.oi_table table td.td_num{width:80px;text-align:center;}
+.oi_table table td.td_thumb{width:145px;padding:13px 0;text-align:center;}
+.oi_table table td.td_thumb img {width:100%}
+.oi_table table td.td_prod{width:355px;text-align:left;padding-left:30px;}
+.oi_table table td.td_official{width:240px;text-align:center;}
+.oi_table table td.td_progress{width:240px;text-align:center;}
+.oi_table table td.td_pay{width:140px;text-align:center;}
+
+.oi_table table td .selected_color{display:inline-block;vertical-align:middle;width:17px;height:17px;border-radius:100%;margin-left:8px;border:1px solid #dfdfdf;}
+.oi_table table td.td_official a{display:inline-block;width:155px;height:36px;line-height:34px;border:1px solid #000;border-radius:5px;}
+.oi_table table td.td_official a.active{color:#E80000;border-color:#E80000;}
+.oi_table table td.td_official a.deactive{color:#666;border-color:#666;pointer-events:none;}
+.oi_table table td.td_progress span{display:inline-block;width:90px;height:36px;line-height:36px;color:#fff;background:#000;border-radius:5px;}
+.oi_table table td.td_progress span.preparing{background:#999;}
+.oi_table table td.td_progress span.complete{background:#33b06d;}
+.oi_table table td.td_progress span.review_write{background:#E80000;cursor:pointer;}
+
+form {
+    display: block;
+    margin-top: 0em;
+}
+
+input, button {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', 'NanumSquare', 'Nanum Barun Gothic', dotum, sans-serif;
+    font-size: 1em;
+}
+label, input, button, select, img {
+    vertical-align: middle;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+input[type="hidden" i] {
+    appearance: none;
+    background-color: initial;
+    cursor: default;
+    display: none !important;
+    padding: initial;
+    border: initial;
+    border-color: initial;
+    border-radius: initial;
+}
+user agent stylesheet
+input {
+    writing-mode: horizontal-tb !important;
+
+    text-rendering: auto;
+    color: fieldtext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    background-color: field;
+    margin: 0em;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
+.register {width:600px;margin:70px auto 0;}
+.regi_box1 {}
+.regi_tit {font-size:24px;line-height:24px;position:relative;padding-bottom:12px;border-bottom:2px solid #202020;display:none;}
+.regi_ul {padding:0 27px 0 22px;}
+.regi_ul .regi_li {margin-top:30px;width:100%;display:table;}
+.regi_ul .regi_li .th_div {display:table-cell;vertical-align:top;width:180px;font-size:18px;line-height:41px;padding-left:33px;position:relative;}
+.regi_ul .regi_li .th_div::before {content:'';width:6px;height:26px;background:#e80000;position:absolute;left:0;top:50%;margin-top:-13px;}
+.regi_ul .regi_li .td_div {display:table-cell;vertical-align:middle;width:calc(100% - 180px);width:-webkit-calc(100% - 180px);font-size:17px;}
+.regi_ipt {width:100%;height:41px;border:1px solid #ccc;padding-left:10px;background:#fff;font-size:17px;}
+.regi_tel {width:30%;}
+.regi_ipt.readonly {background:#ececec;}
+.tel_bar {}
+.regi_mail {width:40%;position:relative;}
+.regi_mail2 {background:url(../img/regi_mail_arr.png) no-repeat 94% center;}
+.regi_ipt::placeholder {color:#aaa;}
+.select_mail {display:inline-block;vertical-align:middle;position:relative;width:50%;}
+.select_mail .regi_mail {width:100%;}
+.regi_ul li .td_div span {display:inline-block;vertical-align:middle;line-height:35px;}
+.regi_ul li .td_div .golbange {margin:0 1px;}
+
+.leave_btn a {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+    padding: 6px 40px;
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 30px;
+}
+a {
+    color: #000;
+    text-decoration: none;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.leave_btn {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    margin-right: 10px;
+}
+p {
+    margin: 0;
+    padding: 0;
+    word-break: break-all;
+}
+
+.regi_btn {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+p {
+    margin: 0;
+    padding: 0;
+    word-break: break-all;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.regi_btn_wrap {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.regi_btn button {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    padding: 6px 40px;
+    background: #000;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+}
+button {
+    cursor: pointer;
+}
+input, button {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', 'NanumSquare', 'Nanum Barun Gothic', dotum, sans-serif;
+    font-size: 1em;
+}
+label, input, button, select, img {
+    vertical-align: middle;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+</style>
+</head>
+<body>
+
+
+<div id="sub_div">
+
+
+	<div class="inner ">
+		<div class="sub_top_wrap ">
+			<h3 class="sub_tit_h3">마이페이지</h3>						
+
+
+
+
+<ul class="sub_cate">
+	<li class="active"><a href="index.jsp?workgroup=mypage&process=jumun">주문조회</a></li>
+					<li><a href="index.jsp?workgroup=mypage&process=muneui">내 1:1문의내역</a></li>
+					<li><a href="#">정보수정</a></li>
+		
+</ul>
+		</div>
+		
+		<div class="register">
+	<form name="frm" id="frm" method="post" action="https://www.ezphone.net/sub/register_update.php" onsubmit="return fnSubmit(this);" autocomplete="off">
+		<input type="hidden" name="w" id="w" value="u">
+		<input type="hidden" name="hp_chk" id="hp_chk" value="1">
+		<input type="hidden" name="mail_chk" id="mail_chk" value="1">
+		<div class="regi_box1">
+			<h4 class="regi_tit">가입정보</h4>
+			<ul class="regi_ul">
+				<li class="regi_li">
+					<div class="th_div">아이디</div>
+					<div class="td_div">
+						<input type="text" name="mb_id" id="mb_id" class="regi_ipt readonly" value="vmfhwprxm" readonly="">
+					</div>
+				</li>
+				<li class="regi_li">
+					<div class="th_div">비밀번호</div>
+					<div class="td_div">
+						<input type="password" name="mb_password" id="mb_password" class="regi_ipt">
+					</div>
+				</li>
+				<li class="regi_li">
+					<div class="th_div">비밀번호확인</div>
+					<div class="td_div">
+						<input type="password" name="mb_password_chk" id="mb_password_chk" class="regi_ipt">
+					</div>
+				</li>
+				<li class="regi_li">
+					<div class="th_div">이름</div>
+					<div class="td_div">
+						<input type="text" name="mb_name" id="mb_name" class="regi_ipt" value="양혜란">
+					</div>
+				</li>
+				<li class="regi_li">
+					<div class="th_div">연락처</div>
+					<div class="td_div">
+						<input type="text" name="mb_hp1" id="mb_hp1" class="regi_ipt regi_tel" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="3" value="010">
+						<span class="tel_bar">-</span>
+						<input type="text" name="mb_hp2" id="mb_hp2" class="regi_ipt regi_tel" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="4" value="1111">
+						<span class="tel_bar">-</span>
+						<input type="text" name="mb_hp3" id="mb_hp3" class="regi_ipt regi_tel" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="4" value="1111">
+					</div>
+				</li>
+				<li class="regi_li">
+					<div class="th_div">이메일</div>
+					<div class="td_div">
+						<input type="text" name="mb_mail1" id="mb_mail1" class="regi_ipt regi_mail" value="hejflwf">
+						<span class="golbange">@</span>
+						<div class="select_mail">
+							<input type="text" name="mb_mail2" id="mb_mail2" class="regi_ipt regi_mail regi_mail2" placeholder="직접입력" value="nate.com" readonly="">
+							<ul class="select_ul" style="display: none;">
+								<li>직접입력</li>
+								<li>naver.com</li>
+								<li>nate.com</li>
+								<li>empas.com</li>
+								<li>gmail.com</li>
+								<li>daum.net</li>
+								<li>kakao.com</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+			
+				
+		<div class="regi_btn_wrap regi_btn_mrg">
+						<p class="leave_btn">
+				<a href="javascript:member_leave();">회원탈퇴</a>
+			</p>
+						<p class="regi_btn">
+				<button>
+										정보수정				</button>
+			</p>		
+		</div>
+	</form>
+</div>
+		
+		
+		
+		

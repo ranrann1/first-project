@@ -1,0 +1,25 @@
+@charset "UTF-8";
+body{
+	min-height:100vh;
+	display:flex;
+	flex-direction:column;
+}
+
+#footer{
+	height: 120px;
+	border: 1px solid blue;
+	background-color : gray;
+	text-align:center;
+	font-size: 1.2e;
+	margin-top:auto;
+}
+#content{
+	text-align:center;
+	font-size : 35px;
+}
+a{
+	text-decoration-line: none;	
+}
+#manager_content{
+	text-align:left;
+}

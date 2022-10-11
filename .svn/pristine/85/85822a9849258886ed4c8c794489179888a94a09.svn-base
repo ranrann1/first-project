@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+<img src="<%=request.getContextPath() %>/images/banner.PNG" width="1200"></div>
+        <div class="swiper-slide">
+<img src="<%=request.getContextPath() %>/images/banner2.PNG" width="1200"></div>
+        <div class="swiper-slide">
+<img src="<%=request.getContextPath() %>/images/banner3.PNG" width="1200"></div>
+        ...
+    </div>
+</div>
+<img src="<%=request.getContextPath() %>/images/top.PNG" width="1230" height="100">
+<br>
+<img src="<%=request.getContextPath() %>/images/event1.PNG" width="300">
+<img src="<%=request.getContextPath() %>/images/event1.PNG" width="300">
+<img src="<%=request.getContextPath() %>/images/event1.PNG" width="300">
+<img src="<%=request.getContextPath() %>/images/event1.PNG" width="300">
+<img src="<%=request.getContextPath() %>/images/event1.PNG" width="300">
+
+<script type="text/javascript">
+
+var mySwiper = new Swiper('.swiper-container', {
+	slidesPerView: 1, 
+    spaceBetween: 60,
+	loop: true, 
+	autoplay: true
+});
+
+</script>
+
+

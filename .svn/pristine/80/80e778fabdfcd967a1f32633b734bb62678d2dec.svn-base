@@ -1,0 +1,146 @@
+<%@page import="ez_phone.dao.NoticeDAO"%>
+<%@page import="ez_phone.dto.NoticeDTO"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="ez_phone.dto.MemberDTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	//페이징 처리 관련
+	int pageNum=1;
+	if(request.getParameter("pageNum")!=null) {
+		pageNum=Integer.parseInt(request.getParameter("pageNum"));
+	}
+	
+	int pageSize=10;
+	
+	int totalNotice=NoticeDAO.getDAO().selectNoticeCount();
+	
+	int totalPage=(int)Math.ceil((double)totalNotice/pageSize);
+	
+	if(pageNum<=0 || pageNum>totalPage) {
+		pageNum=1;
+	}
+	
+	int startRow=(pageNum-1)*pageSize+1;
+	
+	int endRow=pageNum*pageSize;
+	
+	if(endRow>totalNotice) {
+		endRow=totalNotice;
+	}
+	
+	MemberDTO noticeManager=(MemberDTO)session.getAttribute("noticeManager");
+	
+	String currentDate=new SimpleDateFormat("yyyy--MM--dd").format(new Date());
+	
+	int rowNum=totalNotice-(pageNum-1)*pageSize;
+%>
+
+
+
+<p>공지사항</p>
+	<%--
+	<% if(noticeManager!=null) { //관리자인 경우 글쓰기 활성화 %>
+	<div style="text-align: right;">
+		<button type="button" onclick="location.href='index.jsp?workgroup=notice&work=notice_write';">글쓰기</button>
+	</div>"
+	<% } %>
+	--%>
+
+	<table align="center" width="70%" cellpadding="0" cellspacing="0" border="0">
+		<tr height="5">
+  			<td width="5"></td>
+ 		</tr>
+ 		<tr style="text-align:center;">
+			<td width="5"></td>
+		<tr style="font-size: 15px;">
+			<td align="left" width="100">번호</td>
+			<td align="left" width="350">제목</td>
+			<td width="160">작성일</td>
+			<td width="70">조회수</td>
+			<td width="7"><width="5" height="30" /></td>
+		</tr>
+		
+		<tr height="25" align="center">
+		</tr>
+		
+		<tr height="1" bgcolor="#D2D2D2">
+			<td colspan="6"></td>
+		</tr>
+	
+	<tr>
+		<td><%=rowNum %></td>
+		<% rowNum--; %>
+		
+	<%--
+		<td class="title">
+			<% if(notice.getStatus()==1) { //[일반글]인 경우 %>
+				<a href="index.jsp?workgroup=notice&work=notice_detail&num=<%=notice.getCode() %>&pageNum=<%=pageNum%>">
+					<%=notice.getTitle() %>
+				</a>
+			<% } else if(notice.getStatus()==0) { //[삭제글]인 경우 %>
+		
+			<% } %>
+		</td>
+		
+		<% if(notice.getStatus()!=0) { //삭제 게시글이 아닌 경우 %>
+			<td><%=notice.getReadcount() %></td>
+			
+			<td>
+				<% if(currentDate.equals(notice.getRegDate().substring(0, 10))) { //오늘 작성된 게시글인 경우 %>
+					<%=notice.getRegDate().substring(11) %>
+				<% } else { //과거에 작성된 게시글인 경우 %>
+					<%=notice.getRegDate() %>
+				<% } %>
+			</td>
+		<% } else { //삭제 게시글인 경우 %>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+		<% } %>
+		--%>
+	</tr>
+	
+
+ 	<tr height="1" bgcolor="#82B5DF">
+ 		<td colspan="6" width="750"></td>
+ 	</tr>
+</table>
+
+	<%-- 페이지 번호 출력 : 클릭 이벤트에 의한 링크 설정 - 블럭화 처리 --%>
+	<%
+		//하나의 블럭에 출력될 페이지 번호의 갯수를 설정
+		int blockSize=5;
+	
+		int startPage=(pageNum-1)/blockSize*blockSize+1;
+
+		int endPage=startPage+blockSize-1;
+		
+		if(endPage>totalPage) {
+			endPage=totalPage;
+		}
+	%>	
+	
+	<% if(startPage>blockSize) { %>
+		<a href="index.jsp?workgroup=notice&work=notice_list&pageNum=1">[처음]</a>
+		<a href="index.jsp?workgroup=notice&work=notice_list&pageNum=<%=startPage-blockSize%>">[이전]</a>
+	<% } else {//첫번째 블럭인 경우 - 링크 미설정 %>
+		[처음][이전]
+	<% } %>
+	
+	<% for(int i=startPage;i<=endPage;i++) { %>
+		<% if(pageNum!=i) {//요청 페이지 번호와 이벤트 페이지 번호가 다른 경우 - 링크 설정 %>
+			<a href="index.jsp?workgroup=notice&work=notice_list&pageNum=<%=i%>">[<%=i %>]</a>
+		<% } else {//요청 페이지 번호와 이벤트 페이지 번호가 같이 경우 - 링크 미설정 %>
+			[<%=i %>]
+		<% } %>
+	<% } %>
+	
+	<% if(endPage!=totalPage) {//마지막 블럭이 아닌 경우 - 링크 설정 %>
+		<a href="index.jsp?workgroup=notice&work=notice_list&pageNum=<%=startPage+blockSize%>">[다음]</a>
+		<a href="index.jsp?workgroup=notice&work=notice_list&pageNum=<%=totalPage%>">[마지막]</a>
+	<% } else {//마지막 블럭인 경우 - 링크 미설정 %>
+		[다음][마지막]
+	<% } %>

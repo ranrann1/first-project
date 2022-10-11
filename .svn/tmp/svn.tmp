@@ -1,0 +1,96 @@
+<%@page import="ez_phone.dto.MemberDTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	
+	
+<%
+request.setCharacterEncoding("utf-8");
+
+
+String workgroup = request.getParameter("workgroup");
+if (workgroup == null) {
+	workgroup = "main";
+}
+
+String process = request.getParameter("process");
+if (process == null) {
+	process = "main";
+}
+
+String contentFilePath = workgroup + "/" + process + ".jsp";
+System.out.println("contentFilePath = " + contentFilePath);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EZPHONE</title>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<link href="style.css" type="text/css" rel="stylesheet">
+<link href="style_cart.css" type="text/css" rel="stylesheet">
+
+
+
+</head>
+<body>
+	<div id="header">
+		<div id="header_top">
+			<ul>
+			<li><a href="index.jsp?workgroup=member&process=member_login">로그인</a></li>
+			<li><a href="index.jsp?workgroup=member&process=member_join">회원가입</a></li>
+			<!-- <li><a href="index.jsp?workgroup=mypage&process=mypage">마이페이지</a></li> -->
+			</ul>
+		</div>
+		<div id="header_middle">
+			<h1>
+				<img src="<%=request.getContextPath()%>/images/EZPHONE.png"
+					width="30"> <a href="index.jsp?workgroup=main&process=main">EZPHONE</a>&nbsp;&nbsp;
+				<a href="index.jsp?workgroup=samsung&process=s_list"
+					style="font-size: 20px; color: black">삼성 갤럭시</a>&nbsp;&nbsp; <a
+					href="index.jsp?workgroup=apple&process=a_list"
+					style="font-size: 20px; color: black">애플 아이폰</a> &nbsp;&nbsp; <a
+					href="index.jsp?workgroup=notice&process=n_list"
+					style="font-size: 20px; color: black">공지사항</a> &nbsp;&nbsp; <a
+					href="index.jsp?workgroup=event&process=e_list"
+					style="font-size: 20px; color: black">이벤트</a>&nbsp;&nbsp; <img
+					src="<%=request.getContextPath()%>/images/logout.png" width="30"
+					style="float: right; text-align: center">&nbsp;&nbsp;&nbsp;&nbsp;
+				<img src="<%=request.getContextPath()%>/images/contact.png"
+					width="40" style="float: right"> <a
+					href="index.jsp?workgroup=cart_menu&process=cart"
+					style="font-size: 20px; color: black"> <img
+					src="<%=request.getContextPath()%>/images/cart.png" width="40"
+					style="float: right">
+				</a> <input type="text" id="search" onkeyup="" placeholder="핸드폰 검색"
+					style="float: middle"> <img
+					src="<%=request.getContextPath()%>/images/search.png" width="20"
+					style="float: middle">
+			</h1>
+			<hr>
+		</div>
+	</div>
+	<div id="content">
+		<jsp:include page="<%=contentFilePath%>" />
+	</div>
+
+	<div id="footer">
+		<div></div>
+		<p>Copyright © Itwill Corp. All rights reserved.</p>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

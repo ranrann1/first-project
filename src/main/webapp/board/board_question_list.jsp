@@ -1,0 +1,440 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<style type="text/css">
+	
+a{
+	text-decoration-line: none;
+	color: black;
+}	
+
+
+div {
+	display: block;
+}
+
+
+
+#sub_div>.inner {
+	padding: 65px 0 85px;
+}
+
+.inner {
+	width: 1200px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.sub_tit_h3 {
+	text-align: center;
+	font-size: 30px;
+	line-height: 1.1;
+	font-family: "BR";
+}
+
+
+
+html, h1, h2, h3, h4, h5, h6, form, fieldset, img {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+h3 {
+	display: block;
+	font-size: 1.17em;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	font-weight: bold;
+}
+
+.sub_cate {
+	text-align: center;
+	margin: 65px auto 50px;
+	overflow: hidden;
+	display: table;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul {
+	display: block;
+	list-style-type: disc;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	padding-inline-start: 40px;
+}
+
+.sub_cate li {
+	display: inline-block;
+	vertical-align: middle;
+	width: 280px;
+}
+
+li {
+	list-style: none;
+}
+
+ol, li, dl, dt, dd {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	display: list-item;
+	text-align: -webkit-match-parent;
+}
+
+.sub_cate {
+	text-align: center;
+	margin: 65px auto 50px;
+	overflow: hidden;
+	display: table;
+}
+
+/* .sub_cate li.active a {
+	font-weight: 600;
+	color: #e80000;
+} */
+
+.sub_cate li a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	font-size: 18px;
+	line-height: 1.2;
+	font-weight: 400;
+	color: #000;
+	border-bottom: 4px solid #efefef;
+	padding-bottom: 20px;
+	position: relative;
+	transition: all 0.2s;
+}
+
+.notice {
+	margin-top: 60px;
+}
+
+
+
+p {
+	margin: 0;
+	padding: 0;
+	word-break: break-all;
+}
+
+p {
+	display: block;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+}
+
+.notice {
+	margin-top: 60px;
+}
+
+.n_title {
+	font-size: 24px;
+	margin-bottom: 15px;
+}
+
+.n_table table {
+	width: 100%;
+	border-spacing: 0;
+	border-bottom: 1px solid #949494;
+}
+
+.n_table table th {
+	height: 70px;
+	text-align: center;
+	font-size: 17px;
+	border-top: 2px solid #1a1a1a;
+	border-bottom: 1px solid #949494;
+}
+
+.n_table table td {
+	height: 148px;
+	font-size: 17px;
+	border-bottom: 1px solid #dcdcdc;
+}
+
+.n_table table tr:last-child td {
+	border-bottom: 0;
+}
+
+.n_table table td.td_num {
+	width: 80px;
+	text-align: center;
+}
+
+.n_table table td.td_thumb {
+	width: 145px;
+	padding: 13px 0;
+	text-align: center;
+}
+
+.n_table table td.td_thumb img {
+	width: 100%
+}
+
+.n_table table td.td_prod {
+	width: 355px;
+	text-align: left;
+	padding-left: 30px;
+}
+
+.n_table table td.td_official {
+	width: 240px;
+	text-align: center;
+}
+
+.n_table table td.td_progress {
+	width: 240px;
+	text-align: center;
+}
+
+.n_table table td.td_pay {
+	width: 140px;
+	text-align: center;
+}
+
+.n_table table td .selected_color {
+	display: inline-block;
+	vertical-align: middle;
+	width: 17px;
+	height: 17px;
+	border-radius: 100%;
+	margin-left: 8px;
+	border: 1px solid #dfdfdf;
+}
+
+.n_table table td.td_official a {
+	display: inline-block;
+	width: 155px;
+	height: 36px;
+	line-height: 34px;
+	border: 1px solid #000;
+	border-radius: 5px;
+}
+
+.n_table table td.td_official a.active {
+	color: #E80000;
+	border-color: #E80000;
+}
+
+.n_table table td.td_official a.deactive {
+	color: #666;
+	border-color: #666;
+	pointer-events: none;
+}
+
+.n_table table td.td_progress span {
+	display: inline-block;
+	width: 90px;
+	height: 36px;
+	line-height: 36px;
+	color: #fff;
+	background: #000;
+	border-radius: 5px;
+}
+
+.n_table table td.td_progress span.preparing {
+	background: #999;
+}
+
+.n_table table td.td_progress span.complete {
+	background: #33b06d;
+}
+
+.n_table table td.td_progress span.review_write {
+	background: #E80000;
+	cursor: pointer;
+}
+
+.sub_cate {text-align:center;margin:65px auto 50px;overflow:hidden;display:table;}
+.sub_cate li {display:inline-block;vertical-align:middle;width:280px;}
+.sub_cate li a {display:block;width:100%;height:100%;font-size:18px;line-height:1.2;font-weight:400;color:#000;border-bottom:4px solid #efefef;padding-bottom:20px;position:relative;transition:all 0.2s;}
+.sub_cate li a::after {content:'';width:100%;height:4px;background:#e80000;position:absolute;left:0;bottom:-4px;border-radius:3px;opacity:0;transition:all 0.2s;}
+.sub_cate li a:hover {color:#e80000;}
+.sub_cate li a:hover::after {opacity:1;}
+.sub_cate li.active a {font-weight:600;color:#e80000;}
+.sub_cate li.active a::after {opacity:1;}
+
+#bo_cate {margin:35px 0}
+#bo_cate h2 {position:absolute;font-size:0;line-height:0;overflow:hidden}
+#bo_cate ul {;zoom:1}
+#bo_cate ul:after {display:block;visibility:hidden;clear:both;content:""}
+#bo_cate li {display:inline-block;position:relative;}
+#bo_cate li::after{content:'';display:block;width:1px;height:13px;background:#dcdcdc;position:absolute;top:50%;right:0;transform:translateY(-50%);}
+#bo_cate li:last-child::after{display:none;}
+#bo_cate a {display:block;padding:0 20px;font-size:18px;color:#666;}
+#bo_cate a:focus, #bo_cate a:hover, #bo_cate a:active {text-decoration:none;background:#f3f3f3}
+#bo_cate #bo_cate_on {z-index:2;color:#e80000;}
+
+#faq_wrap {margin:10px 0 30px}
+#faq_wrap h2 {position:absolute;font-size:0;line-height:0;overflow:hidden}
+.faq_admin {text-align:right}
+#faq_wrap ol {margin:0;padding:0;list-style:none}
+#faq_wrap li{border:1px solid #d4d4d4;border-top:none;background:#fff;}
+#faq_wrap li:first-child{border-top:1px solid #d4d4d4;}
+#faq_wrap li h3{font-size:17px;line-height:1.8;font-weight:600;position:relative;}
+#faq_wrap li h3 .arr{position:absolute;top:50%;right:24px;margin-top:-8px;transition:0.5s;}
+#faq_wrap li h3 .arr.on{transform:rotate(180deg);}
+#faq_wrap li h3 .tit_bg{display:inline-block;position:absolute;top:25px;left:28px;text-align:center;font-size:28px;line-height:1.1;font-weight:700;color:#000;}
+#faq_wrap li h3 a {display:block;padding:25px;padding-left:94px;}
+#faq_con .con_inner{display:none;border-top:1px solid #d4d4d4;padding:25px;padding-left:94px;font-size:15px;line-height:30px;position:relative;background: #f0f0f0;}
+#faq_con .con_inner .tit_bg{display:inline-block;position:absolute;top:28px;left:28px;text-align:center;font-size:28px;line-height:1.1;font-weight:700;color:#e80000;}
+#faq_con .con_inner .closer_btn{height:25px;font-size:13px;display:inline-block;padding:0 5px;border-radius:5px;background:#fff;cursor:pointer;}
+#faq_con .con_closer{text-align:right;}
+
+#faq_sch {text-align:center;border:1px solid #ccc;background:#fff;;padding:30px;margin:10px 0}
+#faq_sch form{display:inline-block;position:relative}
+#faq_sch .sch_tit{font-size:20px;font-weight:bold;display:inline-block;margin-right:10px;vertical-align:middle}
+#faq_sch .frm_input{border-color:#646982;border-radius:0;width:300px}
+#faq_sch .btn_submit{padding:0 10px;height:40px;color:#000;font-size:1.083em;font-weight:bold;color:#fff;background:#253dbe;}
+
+</style>
+<div id="sub_div">
+
+	
+	
+	<div class="inner ">
+		<div class="sub_top_wrap ">
+			<h3 class="sub_tit_h3">FAQ</h3>			<p class="sub_desc_p ">			
+				<ul class="sub_cate">
+					<li><a href="index.jsp?workgroup=notice&process=notice_list">공지사항</a></li>
+					<li><a href="index.jsp?workgroup=board&process=board_list">1:1문의</a></li>
+					<li class="active"><a href="index.jsp?workgroup=board&process=board_question_list">자주묻는질문</a></li>
+
+				</ul>
+
+		</div>
+
+<!-- FAQ 시작 { -->
+<div id="faq_hhtml"></div>
+<fieldset id="faq_sch" style="display:none">
+    <legend>FAQ 검색</legend>
+
+    <form name="faq_search_form" method="get">
+    <span class="sch_tit">FAQ 검색</span>
+    <input type="hidden" name="fm_id" value="1">
+    <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
+    <input type="text" name="stx" value="" required id="stx" class="frm_input " size="15" maxlength="15">
+    <button type="submit" value="검색" class="btn_submit"><i class="fa fa-search" aria-hidden="true"></i> 검색</button>
+    </form>
+</fieldset>
+
+
+<nav id="bo_cate">
+    <h2>자주하시는질문 분류</h2>
+    <ul id="bo_cate_ul">
+                <li><a href="index.jsp?workgroup=board&process=board_question_list"  id="bo_cate_on" ><span class="sound_only"></span>신청·개통문의</a></li>
+                <li><a href="index.jsp?workgroup=board&process=board_faq2"  >배송문의</a></li>
+                <li><a href="index.jsp?workgroup=board&process=board_faq3"  >취소·교환·반품문의</a></li>
+            </ul>
+</nav>
+
+<div id="faq_wrap" class="faq_1">
+        <section id="faq_con">
+        <h2>신청·개통문의 목록</h2>
+        <ol>
+                        <li>
+                <h3><span class="tit_bg font_mt">Q</span><a href="#none" onclick="return faq_open(this);"><p>기기반납이나 부가서비스를 가입 해야 하나요?</p></a></h3>
+                <div class="con_inner">
+                    <span class="tit_bg font_mt">A</span>
+                    <p>"<span style="color:rgb(239,0,124);">이지폰</span>"은 <span style="color:rgb(255,0,0);">기</span><span style="color:rgb(255,0,0);">기반납 및 장기할부 후 추후대납 등 절대 없습니다</span>.<br />또한 <span style="color:rgb(239,0,124);">카드결합 조건도 없습니다.</span></p><p><br /></p><p>오로지 <span style="color:rgb(255,0,0);">순수하게 구매 시 할인</span>입니다.</p><p><br /></p><p>반납 및 부가서비스 및 카드 조건등을 내세우는</p><p>업체하고는 비교가 불가한 실질적인 할인 조건의</p><p><span style="color:rgb(255,0,0);">온라인 대리점</span>입니다.</p>        
+                </div>
+            </li>
+                        <li>
+                <h3><span class="tit_bg font_mt">Q</span><a href="#none" onclick="return faq_open(this);"><p>휴대폰 변경 시 가족결합할인 등은 어떻게 되나요?</p></a></h3>
+                <div class="con_inner">
+                    <span class="tit_bg font_mt">A</span>
+                    <p><span style="color:rgb(255,0,0);">번호이동 시</span> : 통신사를 옮기며 기존 통신사 할인 소멸<br /><br /><span style="color:rgb(255,0,0);">기기변경 시</span> : 기존결합 할인 등 변동 없음 그대로 유지</p>                   
+                </div>
+            </li>
+                        <li>
+                <h3><span class="tit_bg font_mt">Q</span><a href="#none" onclick="return faq_open(this);"><p>기존 휴대폰에서 데이터는 어떻게 옮기나요..?</p></a></h3>
+                <div class="con_inner">
+                    <span class="tit_bg font_mt">A</span>
+                    <p>요즘은 휴대폰 자체적으로나 외부적으로 데이터 옮기는 </p><p>방법이 굉장히 스마트 해졌습니다 예전처럼 복잡한 과정을</p><p>거치지 않으셔도 됩니다.</p><p><br /></p><p><span style="color:rgb(255,0,0);">아래에 각 유형 별로 상세하게 설명되어있는 블로그 링크입니다.</span></p><p><br /></p><p>안드로이드(갤럭시,엘지) ▶ 안드로이드(갤럭시,엘지)</p><p><br /></p><p>삼성: <a href="https://www.samsungsvc.co.kr/online/faqView.do?faqId=KNOW0000026723" rel="nofollow">https://www.samsungsvc.co.kr/online/faqView.do?faqId=KNOW0000026723</a></p><p>엘지: <a href="https://www.lge.co.kr/lgekor/microsite/mobileswitch/main.do" rel="nofollow">https://www.lge.co.kr/lgekor/microsite/mobileswitch/main.do</a></p><p><br /></p><p>IOS ▶ 안드로이드(갤럭시,엘지)</p><p><br /></p><p><a href="https://www.samsungsvc.co.kr/online/faqView.do?faqId=KNOW0000026723" rel="nofollow">https://www.samsungsvc.co.kr/online/faqView.do?faqId=KNOW0000026723</a> </p><p>스마트 스위치 사용 시 ICLOUD에서 가져오기 또는 USB컨넥터 사용(유선)<br /><br />안드로이드(갤럭시,엘지) ▶ IOS(아이폰)<br /><br /><a href="https://blog.naver.com/ddalkijy/222014252673" rel="nofollow">https://blog.naver.com/ddalkijy/222014252673</a> </p><p><br /></p><p>IOS(아이폰) ▶ IOS(아이폰)<br /></p><p><br /></p><p><a href="https://november6.tistory.com/722" rel="nofollow">https://november6.tistory.com/722</a> </p>                    
+                </div>
+            </li>
+                        <li>
+                <h3><span class="tit_bg font_mt">Q</span><a href="#none" onclick="return faq_open(this);"><p>신청서 취소는 어떻게 하나요?</p></a></h3>
+                <div class="con_inner">
+                    <span class="tit_bg font_mt">A</span>
+                    <p>네, 웹사이트 특성상 취소 버튼이 없어<br /><span style="color:rgb(255,0,0);">1644-5978 대표전화 또는 카카오채널 문의 및 1:1문의</span>로</p><p>요청해주시면 즉시 취소가 가능합니다.</p>                   
+                </div>
+            </li>
+                        <li>
+                <h3><span class="tit_bg font_mt">Q</span><a href="#none" onclick="return faq_open(this);"><p>휴대폰 신청 후 개통 시 휴대폰이 끊기나요?</p></a></h3>
+                <div class="con_inner">
+                    <span class="tit_bg font_mt">A</span>
+                    <p>이지폰은 기본적으로 <span style="color:rgb(255,0,0);">휴대폰이 고객님께 안전하게 배송 된 이후</span><br /><span style="color:rgb(255,0,0);">후개통을 원칙</span>으로 하고 있습니다.<br /></p><p><br /></p><p><u><span style="color:rgb(255,108,0);"><u>번호이동</u></span></u>: 통신사가 변경 되어 기존 사용하던 휴대폰은 끊기게 됩니다.<br />이에 따라 번호이동 시엔 기본 후개통을 원칙으로 하고,<br /><br />특수한상황(공시지원금/업체지원금액 변동 예정 등)이 없으면,</p><p>휴대폰 배송이 고객님께 완료 된 이후 개통이 됩니다.<br /><br /><br /><br /><u><span style="color:rgb(255,108,0);"><u>기기변경</u></span></u>: 해당 구매의 경우 기존유심 사용 시 선개통 되어 배송되어도<br />사용중인 휴대폰은 계속 사용이 가능합니다.<br /><br />새유심을 구매하시는 경우는 휴대폰이 끊기게 되어 무조건 후개통입니다.<br /></p>                    
+                </div>
+            </li>
+                        <li>
+                <h3><span class="tit_bg font_mt">Q</span><a href="#none" onclick="return faq_open(this);"><p style="text-align:center;margin-left:0px;" align="left">공식신청서 상 금액이 다르게 나옵니다.</p></a></h3>
+                <div class="con_inner">
+                    <span class="tit_bg font_mt">A</span>
+                    <p>네, 공식신청서는 해당 통신사 정상가 표시가 되어<br />이지폰에서 드리는 <span style="color:rgb(255,0,0);">특별할인 금액은 표기가 되어 있지 않습니다.</span></p><p><br /></p><p>지원드리는 <span style="color:rgb(0,0,0);">특별할인 금액은 개통 시</span> 고객 선납부금 형태로</p><p>저희 업체측에서 <span style="color:rgb(0,0,0);">할인금액만큼 납부 되어 개통됩니다.</span> </p><p><br /><span style="color:rgb(255,0,0);">이 방식은 특별할인을 해주는 온라인 판매 업체라면</span></p><p><span style="color:rgb(255,0,0);">100% 같은 방식이므로 안심하셔도 됩니다.</span><br /><br />개통 후 고객센터 또는 고객센터 어플로 <span style="color:rgb(255,0,0);">개통 내용을</span></p><p><span style="color:rgb(255,0,0);">고객님께서 직접 확인 하실 수 있으며,</span></p><p><br /></p><p>신청조건과 <span style="color:rgb(255,0,0);">개통조건이 다를 시 즉시 말씀 부탁드립니다</span></p><p><br /></p><p>추가로 개통 후 14일 2주 이내에는 단순변심 및 고객귀책 사유 외</p><p><span style="color:rgb(255,0,0);">개통철회 및 취소가 가능하오니 안심하셔도 됩니다</span>.</p>                    
+                </div>
+            </li>
+                        <li>
+                <h3><span class="tit_bg font_mt">Q</span><a href="#none" onclick="return faq_open(this);"><p>공식신청서는 무엇인가요? 꼭 작성 해야 되나요?</p></a></h3>
+                <div class="con_inner">
+                    <span class="tit_bg font_mt">A</span>
+                    <p>네, 공식신청서란 일반 판매점 또는 대리점에서</p><p>구매 시 작성하는 서류와 같은 기능을 하며,<br /><span style="color:rgb(255,0,0);">미작성 시 개통 및 배송이 불가능합니다.</span><br /><br />공식신청서는 업체에서 진행하는 정보조회 외에</p><p>개통을 하기 위해 본인인증을 진행하는 절차로</p><p>생각 하시면 됩니다. </p><p><br /></p><p><span style="color:rgb(255,0,0);">본인 인증 법은 신용카드/범용공인인증서가 있습니다.</span></p>                    
+                </div>
+            </li>
+                    </ol>
+    </section>
+    </div>
+
+
+<div id="faq_thtml"></div>
+
+<!-- } FAQ 끝 -->
+
+
+<script src="text/javascript"></script>
+<script>
+$(function() {
+    $(".closer_btn").on("click", function() {
+        $(this).closest(".con_inner").slideToggle();
+    });
+});
+
+function faq_open(el)
+{
+    var $con = $(el).closest("li").find(".con_inner");
+
+    if($con.is(":visible")) {
+        $con.slideUp();
+		$(el).siblings(".arr").removeClass("on");
+    } else {
+        $("#faq_con .con_inner:visible").css("display", "none");
+		$(".arr").removeClass("on");
+
+        $con.slideDown(
+            function() {
+                // 이미지 리사이즈
+                $con.viewimageresize2();
+            }
+        );
+				$(el).siblings(".arr").addClass("on");
+    }
+
+    return false;
+}
+</script>	</div>
+</div>

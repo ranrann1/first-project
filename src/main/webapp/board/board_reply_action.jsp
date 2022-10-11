@@ -1,0 +1,25 @@
+<%@page import="ez_phone.dao.BoardDAO"%>
+<%@page import="ez_phone.dto.BoardDTO"%>
+<%@page import="ez_phone.util.Utility"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="/security/admin_check.jspf" %>
+<%
+	int b_code=Integer.parseInt(request.getParameter("b_code"));
+	String pageNum=request.getParameter("pageNum");
+	String keyword=request.getParameter("keyword");
+	String b_reply = Utility.escapeTag(request.getParameter("b_reply"));
+	
+	//BoardDTO 객체를 생성하고 필드값 변경
+	BoardDTO board=new BoardDTO();
+	board.setB_code(b_code);
+	board.setB_reply(b_reply);
+	
+	//기존 글 번호의 리플 값 변경
+	BoardDAO.getDAO().updateReply(board);
+	
+	//페이지 이동
+	out.println("<script type='text/javascript'>");
+	out.println("location.href='index.jsp?workgroup=board&process=board_list';");
+	out.println("</script>");	
+%>

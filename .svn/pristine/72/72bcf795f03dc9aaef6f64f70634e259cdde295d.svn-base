@@ -1,0 +1,28 @@
+<%@page import="ez_phone.dto.NoticeDTO"%>
+<%@page import="ez_phone.dao.NoticeDAO"%>
+<%@page import="ez_phone.util.Utility"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String pageNum=request.getParameter("pageNum");
+	String subject=Utility.escapeTag(request.getParameter("subject"));
+	int status=1;
+	if(request.getParameter("secret")!=null) {
+		status=Integer.parseInt(request.getParameter("secret"));
+	}
+	String content=Utility.escapeTag(request.getParameter("content"));	
+	
+	int num=NoticeDAO.getDAO().selectNextNum();
+	
+	NoticeDTO notice=new NoticeDTO();
+	notice.setCode(code);
+	notice.setTitle(title);
+	notice.setContent(content);
+	notice.setStatus(status);
+	
+	NoticeDAO.getDAO().insertNotice(notice);
+	
+	out.println("<script type='text/javascript'>");
+	out.println("location.href='index.jsp?workgroup=notice&work=notice_list&pageNum="+pageNum+"';");
+	out.println("</script>");
+%>

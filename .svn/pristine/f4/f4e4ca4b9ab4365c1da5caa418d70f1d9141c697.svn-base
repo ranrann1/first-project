@@ -1,0 +1,27 @@
+<%@page import="ez_phone.dto.BoardDTO"%>
+<%@page import="ez_phone.dao.BoardDAO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%-- BOARD 테이블에 게시글(새글)을 21개 저장하는 JSP 문서 - 테스트 프로그램 --%>
+<%
+	BoardDTO board=new BoardDTO();
+	for(int i=1;i<=21;i++) {
+		int b_code=BoardDAO.getDAO().selectNextNum();
+		board.setB_code(b_code);
+		board.setB_title("테스트-"+i);
+		board.setB_content1("게시글 연습-"+i);
+		board.setB_status(1);
+		board.setB_check(0);
+		BoardDAO.getDAO().insertBoard(board);
+	}
+%>    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSP</title>
+</head>
+<body>
+	<h1>21개의 테스트 게시글을 저장 하였습니다.</h1>
+</body>
+</html>

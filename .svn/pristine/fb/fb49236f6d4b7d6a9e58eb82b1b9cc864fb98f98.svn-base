@@ -1,0 +1,393 @@
+<%@page import="ez_phone.dao.CartDAO"%>
+<%@page import="ez_phone.dto.CartDTO" %>
+<%@page import="java.util.List"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+String workgroup = request.getParameter("workgroup");
+if (workgroup == null) {
+	workgroup = "main";
+}
+
+String process = request.getParameter("process");
+if (process == null) {
+	process = "main";
+}
+
+String contentFilePath = workgroup + "/" + process + ".jsp";
+System.out.println("contentFilePath = " + contentFilePath);
+%> 
+<%
+	//MEMBER 테이블에 저장된 모든 회원정보를 검색하여 반환하는 DAO 클래스의 메소드 호출
+	List<CartDTO> cartList=CartDAO.getDAO().selectCartList();
+	int sum=0;
+%>  
+<%@include file="/security/login_url.jspf" %>
+<style type="text/css">
+
+html #wrap {
+    max-width: none;
+    overflow: visible;
+}
+
+#container {
+    position: relative;
+    width: 100%;
+}
+
+form {
+    display: block;
+    margin-top: 0em;
+}
+
+.order-content {
+	position: relative;
+    max-width: 100vw;
+    padding: 3.4722vw 28.4722vw 0 1.6667vw;
+}
+
+.order-content .content {
+    min-height: 704px;
+    max-width: 130.9091vw;
+    padding: 4.5455vw 37.2727vw 0 2.1818vw;
+    position: relative;
+}
+
+.content {
+   margin: auto;
+}
+
+.order-content > .tit-box {
+    margin-bottom: 3.6364vw;
+}
+
+.order-content .order-area {
+    margin-bottom: 5.0909vw;
+}
+
+.order-content .order-tbl {
+    display: flex;
+    width: 100%;
+}
+
+.order-content .order-tbl .order-td {
+    position: relative;
+    padding: 40px 0;
+    text-align: left;
+    vertical-align: top;
+}
+
+.order-content .order-tbl .order-td {
+    padding: 3.6364vw 0;
+}
+<!--  -->
+.order-content .order-tbl .order-image {
+    width: 26%;
+    padding-right: 1.3636vw;
+}
+.order-content .order-tbl .order-spec {
+    width: 26%;
+    padding-right: 1.1818vw;
+}
+.order-content .order-tbl .order-count {
+    width: 27%;
+    padding-right: 1.1818vw;
+}
+.order-content .order-tbl .order-price {
+    width: 21%;
+    text-align: right;
+}
+.order-content .order-area > h2 {
+    padding-bottom: 0.4167vw;
+    line-height: 1.3em;
+    font-size: 1.3889vw;
+    color: #000;
+    font-weight: bold;
+    border-bottom: 2px solid #191919;
+}
+
+ol, ul, li {
+    list-style: none;
+}
+.order-info-box > li {
+    padding: 2.0833vw 0;
+    padding-left: 16.3889vw;
+    position: relative;
+    border-bottom: 1px solid #eaeaea;
+}
+.order-info-box .head {
+    left: 0;
+    top: 2.0833vw;
+    width: 18%;
+    max-width: 8.1944vw;
+    padding: 0.5556vw 0;
+    position: absolute;
+    color: #444;
+}
+.input-type-small {
+    width: 100%;
+    max-width: 39.3056vw;
+}
+
+.input-type-ul .s-head, .input-type-div .s-head {
+    left: 0;
+    width: 37%;
+    padding: 0.6944vw 0;
+    position: absolute;
+    color: #444;
+}
+.input-type-ul > li, .input-type-div > div {
+    min-height: 2.2222vw;
+    margin-bottom: 1.3889vw;
+    padding: 0;
+    position: relative;
+    padding-left: 37%;
+}
+.order-content .payment-area {
+    right: 1.6667vw;
+    top: 8.3333vw;
+    width: 100%;
+    max-width: 22.9167vw;
+    background: #fff;
+}
+.order-content .payment-area {
+    position: absolute;
+    right: 24px;
+    top: 120px;
+    width: 100%;
+    max-width: 330px;
+    background: #fff;
+    z-index: 10;
+}
+</style>
+<body>
+<div id="wrap">
+	<div id="container" class='' >
+		<div id="editor"></div>
+		<form id="order_payment_form" name="order_payment_form" method="post">
+			<div class="content order-content" data-sticky-container>
+				<!-- title -->
+				<div class="tit-box cart-title">
+					<h1 class="txt-s20">주문/결제</h1>
+				</div>
+				<!-- title -->
+				
+				<!-- S : 주문상품 -->
+				<div class="order-area order-m-area">
+					<h2>주문상품</h2>
+					<% for(CartDTO cart:cartList) { %>
+					<div class="order-tbl order-page buy-target-goods p-bespoke watch-opt cartListRst">
+						<!-- S : 이미지  -->
+						<div class="order-td order-image">
+							<img src="<%=request.getContextPath()%>/images_product_all/<%=cart.getP_image() %>" width="100" height="100">
+						</div>
+						<!-- E : 이미지  -->
+						<!-- S : 모델명 -->
+						<div class="order-td order-name">
+							<p class="o-title"><%=cart.getP_name() %></p>
+		           			<p class="o-label"><%=cart.getP_code() %></p>
+						</div>
+						<!-- E : 모델명 -->
+						<!-- S : 갯수 -->
+						<div class="order-td order-spec">
+							<p>색상 : <%=cart.getP_color() %></p>
+							<p>용량 : <%=cart.getP_size() %></p>
+						</div>
+							<input type="hidden" name="buyQtyOrd" value="1" /> 		  
+						<!-- E : 갯수 -->
+						<div class="order-td order-count">
+							<p>1개</p>
+						</div>
+						<!-- S : 가격 -->
+						<div class="order-td order-price">
+							<p><%=DecimalFormat.getCurrencyInstance().format(cart.getP_price()) %></p>
+						</div>
+						
+						<!-- E : 가격 -->
+					</div>	
+					<%sum+=cart.getP_price(); %>
+				<% } %>				
+				</div>
+				<!-- E : 주문상품 -->
+				<div class="order-area">
+				<!-- s : 배송정보 -->
+					<h2 class="m-secon-tit">배송 정보</h2>
+					<div class="order-box">
+						<ul class="order-info-box">
+		    			<!-- s : 회원 주문자 정보 -->
+			       			<li id="liMemberInfo" style="display:;">
+			        		    <span class="head">주문자 정보</span>
+			        			    <ul class="order-info-detail info-order">
+			                			<li>이름 : <span id="spanMbrNm"><%=loginMember.getName() %></span></li>
+			               				<li>휴대폰 : <span id="spanMbrMobile"><%=loginMember.getPhone_number() %></span></li>
+			                			<li>이메일 : <span id="spanMbrEmail"><%=loginMember.getE_mail() %></span></li>
+			            			</ul>
+			        		</li>
+			        	<!-- e : 회원 주문자 정보 -->
+			        
+			        	<!-- s : 주문자 정보변경 -->
+			        		<li id ="liEditMemberInfo" class="m-right-space" style="display:none;">
+			        		    <span class="head">주문자 정보</span>
+			        	    		<ul class="input-type-ul input-type-small">
+			               				<li class="input-obj">
+			                    			<label for="order-names" class="s-head">이름</label>
+			                    			<input type="text" id="order_payment_ordr_nm" name="ordNm" placeholder="이름을 입력해 주세요." class="inp-line" value="김동현" onKeyDown="fnOnLimitInputVal(this);" onKeyUp="fnOnLimitInputVal(this);" />
+			                   				<div class="error-msg" style="display: none"><p>이름을 입력해 주세요.</p></div>
+			               				</li>
+			                			<li class="input-obj">
+			                    			<label for="order_payment_ordr_mobile" class="s-head">휴대폰</label>
+			                    			<input type="text" id="order_payment_ordr_mobile" name="ordrMobile" placeholder="숫자만 입력 가능합니다.('-'제외)" class="inp-line" value="01038658361" maxlength="11" onKeyDown="telCheck(this)"/>
+			                    			<div class="error-msg" style="display: none"><p>휴대폰을 입력해 주세요.</p></div>
+			                			</li>
+			                			<li class="input-obj">
+			                    			<label for="order-email" class="s-head">이메일</label>
+			                   				<input type="text" id="order_payment_ordr_email" name="ordrEmail" placeholder="이메일을 입력해 주세요." class="inp-line" value="" />
+			    			                <div class="error-msg" style="display: none"><p>이메일을 입력해 주세요.</p></div>
+			                			</li>
+			            			</ul>
+			            			<span class="order-btn"><a href="javascript:setMemberInfo();" class="btn-underline">변경</a></span>
+			        		</li>
+			        <!-- e : 주문자 정보변경 -->
+					<!-- s : 배송지 정보 -->
+							<li>
+								<span class="head">배송지 정보</span>
+						<!-- s : 단일 배송 -->
+								<div id="delivery-tab-view1" class="tab-view delivery-tab-view info-delivery-single" style="display:block">	
+								    <ul class="order-info-detail info-order">
+								        <li>이름 : <span id="spanOrdAdrsNm"><%=loginMember.getName() %></span></li>
+								        <li>연락처 : <span id="spanOrdAdrsMobile"><%=loginMember.getPhone_number() %></span></li>
+								        <li>배송지 : <span id="spanOrdGbNm"><%=loginMember.getAddress_2() %></span></li>
+								        <li>주소 : <span id="spanOrdRoadAddr">[<%=loginMember.getZipcode() %>]&nbsp;<%=loginMember.getAddress_1() %>&nbsp;</span></li>
+								        <li class="padding-none">
+								    	    <div class="gift-select">
+								            <!-- s : Accessible Dropdown -->
+								        	    <div id="odrDeliveryMsg01" class="wrap-droplist">
+								                    <button class="droplist-button" aria-haspopup="listbox" aria-labelledby="odrDeliveryMsgBtn01" id="odrDeliveryMsgBtn01" name="odrDeliveryMsg" title="배송 메시지를 선택해 주세요.">배송 메시지를 선택해 주세요.</button>
+								                    <ul class="droplist" tabindex="0" role="listbox" aria-labelledby="odrDeliveryMsgBtn01" aria-activedescendant="optDeliveryMsg01-01"><!-- aria-activedescendant에 선택된 li의 id 삽입 -->
+								                    	<li id="optDeliveryMsg01-00" role="option" class="droplist-item" onclick="setDeliveryMsg(this,'default');">배송 메시지를 선택해 주세요.</li>
+								                        <li id="optDeliveryMsg01-01" role="option" class="droplist-item" onclick="setDeliveryMsg(this,'default');">1층 택배 보관함에 놓아주세요.</li>
+														<li id="optDeliveryMsg01-02" role="option" class="droplist-item" onclick="setDeliveryMsg(this,'default');">배송 전, 연락 바랍니다.</li>
+							                            <li id="optDeliveryMsg01-03" role="option" class="droplist-item" onclick="setDeliveryMsg(this,'default');">부재 시, 연락 바랍니다.</li>
+							                            <li id="optDeliveryMsg01-04" role="option" class="droplist-item" onclick="setDeliveryMsg(this,'default');">부재 시, 경비실에 맡겨주세요.</li>
+							                            <li id="optDeliveryMsg01-05" role="option" class="droplist-item" onclick="setDeliveryMsg(this,'default');">부재 시, 문 앞에 놓아주세요.</li>
+							                            <li id="optDeliveryMsg01-06" role="option" class="droplist-item" onclick="setDeliveryMsg(this,'default');">직접 받겠습니다.</li>
+							                            <li id="optDeliveryMsg01-07" role="option" class="droplist-item" onclick="setDeliveryMsg(this,'default',1);">메시지 직접 입력</li>
+								                    </ul>
+								                </div>
+								            <!-- e : Accessible Dropdown -->
+								       		</div>
+								        </li>
+							        <li data-dlvr-msg="default">
+										<input type="text" name="odrDeliveryMsg" placeholder="배송메시지를 입력해 주세요." title="배송 메시지를 입력해 주세요." class="inp-line" maxlength="50" style="display:none" onKeyDown="fnOnLimitInputValAtDtlAddr(this);" onKeyUp="fnOnLimitInputValAtDtlAddr(this);">
+									</li>
+							    	</ul>
+							    	<span class="order-btn"><a href="javascript:orderDlvra.openAddress(this);" class="btn-underline">배송지 정보 변경</a></span>
+							    <!-- e : 단일배송 정보 변경(신규 배송지) -->
+								</div>
+						<!-- e : 단일 배송 -->   
+							</li>
+	
+						</ul> <!-- end order-info-box -->
+					    	<ul class="info-ul">
+				    			<li>배송 희망일은 배송 시 참고 사항이며, 실제 배송되는 날짜는 변경 될 수 있습니다</li>
+								<li>입력하신 이메일 주소로 주문 내역 및 상품 발송 정보를 안내 드립니다</li>
+					    		<li>멤버십 고객명, 주문자 이름, 받으시는 분이 일치하지 않은 경우 멤버십 서비스 중 제한이 있을 수 있습니다</li>
+					    	    <li>
+						    		적립 예정 멤버십 포인트는 멤버십 회원 상태와 등급별 최대 적립 한도,<br>
+						    		분리 배송 여부에 따라 실제 적립 포인트와 상이할 수 있습니다.
+					    		</li>
+					   		 	<li>
+									카드사별 매입 승인 기간 이후로 배송 희망일을 연기할 경우 주문이 취소될 수 있습니다<br>
+									카드사별 매입 승인 기간은 카드사별로 상이하며 주문일로부터 최소 25일부터 최대 88일까지 입니다
+								</li>
+					    	</ul>
+					</div> <!-- end order-box -->
+				<!-- e : 배송정보 -->	
+				<!-- s : 결제 정보 -->
+					<div class="payment-area">
+						<h2>결제 정보</h2>
+						
+							<ul class="payment-listup">
+					            <li>
+					                <span class="head">상품 수</span>
+					                <span class="text"><strong id="goods_cnt">0</strong>개</span>
+					            </li>
+					            <li>
+					                <span class="head">주문 금액</span>
+					                <span class="text"><strong id="order_payment_total_goods_amt_view">0</strong>원</span>
+					            </li>
+							</ul>
+			        		<ul class="cost-listup">
+					            <li>
+					                <span class="head"><strong>결제 예정 금액</strong></span>
+					                <span class="text"><strong id="order_payment_total_pay_amt_view"><%=sum %></strong>원</span>
+					            </li>
+							</ul>
+							<div class="terms-box">
+								<h2>
+									약관 동의<i class="required-item">*</i>
+								</h2>
+								<button type="button" class="btn-terms-view">상세보기</button>
+								<div class="chk-form allChk-box">
+									<input type="checkbox" id="agreement-1" title="" onclick="termsAllCheck(this);" data-allchk-name="allCheck" data-children-name="checkBoxProduct">
+									<label for="agreement-1">주문 상품정보 및 전자금융거래 이용약관에 모두 동의하십니까?</label>
+								</div>
+								<div class="terms-view">
+									<div class="chk-form">
+										<input type="checkbox" id="agreement-21" title="" onclick="setAgreement();" data-chkgrp-name="checkBoxProduct">
+										<label for="agreement-21">전자금융거래 이용약관에 동의 (필수) </label>
+										<a href="javascript:openLayer('popupProductAgree');" data-popup-target="popupProductAgree" class="btn-underline btn-view-agreement">약관보기</a>
+									</div>
+								</div>
+								<div class="chk-form">
+									<input type="checkbox" id="agreement-2" title=""
+										onclick="termsAllCheck(this);">
+									<label for="agreement-2">개인정보 수집&middot;이용 및 제3자 제공에 모두
+											동의하십니까?</label>
+									</div>
+								<div class="terms-view agreement-2">
+									<div class="chk-form">
+											<input type="checkbox" id="agreement-3" title=""
+												onclick="setAgreement(this);"> <label for="agreement-3">개인정보
+												수집 · 이용 동의 (필수)</label> <a
+												href="javascript:openLayer('popupOrderDeliveryAgrm01');"
+												class="btn-underline btn-view-agreement">약관보기</a>
+										</div>
+										<div class="chk-form">
+											<input type="checkbox" id="agreement-4" title="">
+											<label for="agreement-4">개인정보 수집 · 이용 동의 (선택)</label> <a
+												href="javascript:openLayer('popupOrderDeliveryAgrm02');"
+												class="btn-underline btn-view-agreement">약관보기</a>
+										</div>
+										<div class="chk-form">
+												<input type="checkbox" id="agreement-5" title=""
+													onclick="setAgreement(this);">
+												<label for="agreement-5">주문배송을 위한 개인정보 제3자 제공 동의 (필수)</label>
+												<a href="javascript:openLayer('popupOrderDeliveryAgrm03');"
+													class="btn-underline btn-view-agreement">약관보기</a>
+											</div>
+											</div>
+				            <!--케어플러스 이용약관  -->
+							<!-- s : 가정용 시스템에어컨 시공계약 이용약관 -->
+								<!-- e : 가정용 시스템에어컨 시공계약 이용약관 -->
+			
+							</div>
+						<button type="button" class="btn btn-l btn-type3"
+							id="orderPaymentBtn">
+							<strong id="order_payment_total_pay_amt_final_view">0</strong><span>원
+								결제하기</span>
+						</button>
+						
+						<!--s: 22-02-22 문구추가-->
+						<!--e: 22-02-22 문구추가-->
+		                    
+					</div>
+					<!-- e : 결제 정보 -->			
+				</div><!-- end order-area -->
+			</div><!-- end content order-content -->
+		</form>
+	</div><!-- container -->
+</div>
+</body>
+</html>

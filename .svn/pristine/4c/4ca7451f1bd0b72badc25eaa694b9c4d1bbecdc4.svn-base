@@ -1,0 +1,19 @@
+package ez_phone.dao;
+
+public class CartDAO extends JdbcDAO {
+	private static CartDAO _dao;
+	
+	public CartDAO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	static {
+		_dao=new CartDAO();
+	}
+	
+	public static CartDAO getDAO() {
+		return _dao;
+	}
+	
+	
+}
